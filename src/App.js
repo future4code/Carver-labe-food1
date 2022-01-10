@@ -1,11 +1,16 @@
 import React from 'react';
 import Router from './routes/Router';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './constants/theme'
+import GlobalState from './contexts/GlobalState'
 
 function App() {
   return (
-    <div>
-     <Router/>
-    </div>
+    <GlobalState>
+      <ThemeProvider theme={theme}>
+        <Router />
+      </ThemeProvider>
+    </GlobalState>
   );
 }
 
