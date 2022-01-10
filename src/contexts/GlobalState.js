@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GlobalContext } from "../GlobalStateContext/GlobalStateContext";
+import { GlobalContext } from "./GlobalStateContext";
 
 const GlobalState = (props) => {
     const [isLoading, setIsLoading] = useState(true);
