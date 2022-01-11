@@ -1,13 +1,18 @@
 import { createTheme } from '@material-ui/core/styles';
-
 export const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Roboto'
+    ]
+  },
   palette: {
     primary: {
-      main: '#e86e5a',
+      main: '#E86E5A',
+      contrastText: '#000'
     },
     secondary: {
-      main: '#fefefe',
-      contrastText: '#8e8e93',
+      main: '#FEFEFE',
+      contrastText: '#000',
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
