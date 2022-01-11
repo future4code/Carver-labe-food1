@@ -3,14 +3,16 @@ import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 // import { GlobalContext } from '../../contexts/GlobalStateContext'
 // import useRequestData from '../../hooks/useRequestData'
 import { BASE_URL } from '../../constants/url'
-import { MainContainer } from "./styled";
+import { CategoryContainer, MainContainer } from "./styled";
 import axios from "axios";
+import TextField from '@mui/material/TextField';
 
 export default function HomePage() {
 
+    const [isLoading, setIsLoading] = useState(true)
     const [searchFor, setSearchFor] = useState('')
     const [restaurants, setRestaurants] = useState([])
-    
+
 
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkEwMDVtSEJmeVNrdDdPTjBITGFwIiwibmFtZSI6IkFzdHJvZGV2IiwiZW1haWwiOiJhc3Ryb2RldkBmdXR1cmU0LmNvbSIsImNwZiI6IjMzMy44ODguNjY2LTQ0IiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlJ1YSBQcmF0ZXMsIDYxMyAtIEJvbSBSZXRpcm8iLCJpYXQiOjE2NDE4NTg2NjR9.h2sLzEO7-RUZNiVvQ0KKVbVszyoAVkif0-wONTehV94"
 
@@ -23,6 +25,7 @@ export default function HomePage() {
             .then((response) => {
                 console.log(response.data.restaurants)
                 setRestaurants(response.data.restaurants)
+                setIsLoading(false)
             })
             .catch((error) => {
                 console.log(error)
@@ -36,21 +39,30 @@ export default function HomePage() {
         setSearchFor(event.target.value)
     }
 
-    const restaurantsList = restaurants && restaurants.map((restaurant)=>{
-        return <RestaurantCard key={restaurant.id} restaurant={restaurant}/>
-        
+    const restaurantsList = restaurants && restaurants.map((restaurant) => {
+        return <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+
     })
+
+    const categories =  restaurants && restaurants.map((category) => {
+        return <p key={category.id}>{category.category}</p>
+    })
+
     return (
         <MainContainer>
             <p>Rappi4</p>
-            <div>
-                <input
-                    placeholder="Pesquisar"
+            < div >
+                <TextField
+                    placeholder="Restaurante"
                     onChange={handleSearchBar}
-                    valeu={searchFor}
+                    value={searchFor}
+                    variant="outlined"
                 />
             </div>
-            {restaurantsList}
-        </MainContainer>
+            <CategoryContainer>
+                {categories}
+            </CategoryContainer>
+        { restaurantsList }
+        </MainContainer >
     )
 }

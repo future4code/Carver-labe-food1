@@ -11,7 +11,7 @@ export default function RestaurantCard(props) {
       <RestaurantContainer>
         <ImageContainer
           image={logoUrl}
-          title="Logo do restaurante"
+          title={name}
         />
         <DescriptionContainer>
           <Typography gutterBottom variant="body2" component="p">
