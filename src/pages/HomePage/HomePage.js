@@ -3,31 +3,32 @@ import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import { GlobalContext } from '../../contexts/GlobalStateContext'
 import useRequestData from '../../hooks/useRequestData'
 import { BASE_URL } from '../../constants/url'
+import { MainContainer } from "./styled";
 
 export default function HomePage() {
 
     const { isLoading, setIsLoading } = useContext(GlobalContext)
     const [searchFor, setSearchFor] = useState('')
-    const restaurants = useRequestData([], `${BASE_URL}restaurants`)
-    console.log(restaurants)
+    // const restaurants = useRequestData([], `${BASE_URL}restaurants`)
+    // console.log(restaurants)
 
 
     const handleSearchBar = (event) => {
         setSearchFor(event.target.value)
     }
 
-    const restaurantsList = restaurants && restaurants.map((restaurant) => {
-        return (
-            <p>{restaurant.name}</p>
-            // <RestaurantCard 
-            //  key={restaurant.id}
-            //  restaurant={restaurant}
-            //  /> 
-        )
-    })
+    // const restaurantsList = restaurants && restaurants.map((restaurant) => {
+    //     return (
+    //         <p>{restaurant.name}</p>
+    //         // <RestaurantCard 
+    //         //  key={restaurant.id}
+    //         //  restaurant={restaurant}
+    //         //  /> 
+    //     )
+    // })
 
     return (
-        <div>
+        <MainContainer>
             <div>
                 <input
                     placeholder="Pesquisar"
@@ -35,8 +36,9 @@ export default function HomePage() {
                     valeu={searchFor}
                 />
             </div>
-            <h1>Restaurantes</h1>
-            {restaurantsList}
-        </div>
+            <h3>Restaurantes</h3>
+            <RestaurantCard/>
+            {/* {restaurantsList} */}
+        </MainContainer>
     )
 }
