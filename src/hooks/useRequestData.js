@@ -4,6 +4,7 @@ import axios from 'axios'
 const useRequestData = (initialData, url) => {
  const [data, setData] = useState(initialData)
 
+ 
  useEffect(() => {
   axios.get(url, {
     headers: {
@@ -14,7 +15,7 @@ const useRequestData = (initialData, url) => {
     setData(response.data)
    })
    .catch((error) => {
-    console.log(error)
+    console.log(error.message)
     alert('Ocorreu um erro, tente novamente')
    })
  }, [url])
