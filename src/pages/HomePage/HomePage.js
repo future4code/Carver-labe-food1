@@ -35,18 +35,23 @@ export default function HomePage() {
         getRestaurants()
     }, [])
 
+
+    const restaurantsList = restaurants && restaurants
+        .filter((restaurant) => {
+            return restaurant.name.toLowerCase().includes(searchFor)
+        })
+        .map((restaurant) => {
+            return <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+        })
+
+    const categories = restaurants && restaurants.map((category) => {
+        return <p key={category.id}>{category.category}</p>
+    })
+
     const handleSearchBar = (event) => {
         setSearchFor(event.target.value)
     }
 
-    const restaurantsList = restaurants && restaurants.map((restaurant) => {
-        return <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-
-    })
-
-    const categories =  restaurants && restaurants.map((category) => {
-        return <p key={category.id}>{category.category}</p>
-    })
 
     return (
         <MainContainer>
@@ -60,9 +65,9 @@ export default function HomePage() {
                 />
             </div>
             <CategoryContainer>
-                {categories}
+            {categories}
             </CategoryContainer>
-        { restaurantsList }
+            {restaurantsList}
         </MainContainer >
     )
 }
