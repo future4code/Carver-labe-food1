@@ -7,12 +7,17 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#E86E5A',
+      main: '#e86e5a',
       contrastText: '#000'
     },
     secondary: {
-      main: '#FEFEFE',
-      contrastText: '#000',
+      main: '#fefefe',
+      contrastText: '#fefefe',
+    },
+    disabled: {
+      main: '#d1d1d6',
+      contrastText: '#d1d1d6',
+
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
