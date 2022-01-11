@@ -7,12 +7,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 export default function CardProduct({ product }) {
- console.log(product)
+
  return (
-  <Card sx={{ width: 345, display: 'flex' }}>
+  <Card sx={{ width: 305, display: 'flex' }}>
    <CardMedia
     component="img"
-    sx={{ width: 151 }}
+    sx={{ width: 100 }}
     image={product.photoUrl}
     alt={product.name}
    />

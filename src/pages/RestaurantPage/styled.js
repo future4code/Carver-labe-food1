@@ -10,6 +10,7 @@ align-items:center;
 `
 export const DetailContainer = styled.div`
 padding-top:7vh;
+
 `
 export const ImgContainer = styled.div`
 display:flex;
