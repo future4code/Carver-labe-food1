@@ -1,26 +1,27 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import {ImageContainer, RestaurantContainer, MainContainer, DescriptionContainer } from './styled'
 
-export default function RestaurantCard() {
+export default function RestaurantCard(props) {
 
+ const { name, shipping, deliveryTime, logoUrl } = props.restaurant
 
   return (
     <MainContainer>
       <RestaurantContainer>
         <ImageContainer
-          image="https://picsum.photos/id/239/200/200"
-          title="Habib's"
+          image={logoUrl}
+          title="Logo do restaurante"
         />
         <DescriptionContainer>
           <Typography gutterBottom variant="body2" component="p">
-            Habib's
+            {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            50-60 min
+            {deliveryTime} min
           </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-            Frete 6,00
+            Frete {shipping},00
         </Typography>
         </DescriptionContainer>
       </RestaurantContainer>

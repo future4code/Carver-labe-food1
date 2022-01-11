@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import CardMedia from '@material-ui/core/CardMedia';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material/CardContent';
 
 export const ImageContainer = styled(CardMedia)`
-    width: 328px;
+    width: 100%;
     height: 120px;
     margin: 0 0 12px;
     object-fit: contain;
