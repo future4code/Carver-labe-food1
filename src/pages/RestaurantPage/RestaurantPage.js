@@ -1,6 +1,7 @@
 import React from "react";
 import { BodyContainer, ProductsContainer } from "./styled";
 import RestaurantDetail from "./RestaurantsDetail";
+import CardProduct from "../../components/CardProduct/CardProduct";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -102,6 +103,7 @@ const res = {
 }
 
 export default function RestaurantPage() {
+
  return (
   <BodyContainer>
    <AppBar color="secondary">
@@ -122,7 +124,14 @@ export default function RestaurantPage() {
     restaurant={res.restaurant}
    />
    <ProductsContainer>
-
+    {res.restaurant.products.map((product) => {
+     return (
+      <CardProduct
+       key={product.id}
+       product={product}
+      />
+     )
+    })}
    </ProductsContainer>
   </BodyContainer>
  )
