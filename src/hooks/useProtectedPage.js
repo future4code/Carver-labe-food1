@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export const useProtectedPage = () =>{
-  const history = Navigate()
+  const history = useNavigate()
 
   useEffect(()=>{
 

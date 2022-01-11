@@ -1,15 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
-import {GlobalContext} from '../../contexts/GlobalStateContext'
+import { GlobalContext } from '../../contexts/GlobalStateContext'
 import useRequestData from '../../hooks/useRequestData'
-import {BASE_URL} from '../../constants/url'
+import { BASE_URL } from '../../constants/url'
 
 export default function HomePage() {
 
-    const {isLoading, setIsLoading} = useContext(GlobalContext)
+    const { isLoading, setIsLoading } = useContext(GlobalContext)
+    const [searchFor, setSearchFor] = useState('')
     const restaurants = useRequestData([], `${BASE_URL}restaurants`)
-
     console.log(restaurants)
+
+
+    const handleSearchBar = (event) => {
+        setSearchFor(event.target.value)
+    }
 
     const restaurantsList = restaurants && restaurants.map((restaurant) => {
         return (
@@ -23,6 +28,13 @@ export default function HomePage() {
 
     return (
         <div>
+            <div>
+                <input
+                    placeholder="Pesquisar"
+                    onChange={handleSearchBar}
+                    valeu={searchFor}
+                />
+            </div>
             <h1>Restaurantes</h1>
             {restaurantsList}
         </div>
