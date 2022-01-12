@@ -1,9 +1,18 @@
-import React from "react";
+import React from 'react'
+//import logo from '../../assets/logo.png'
+import { ScreenContainer } from './styled'
+import { LogoImage } from './styled'
+import SignAdressForm from './SignAdressForm'
 
-export default function SignAdressPage() {
- return(
-  <div>
-   <h1>SignAdressPage</h1>
-  </div>
- )
+const SignAdressPage = () => {
+    
+    return (
+        <ScreenContainer>
+            <LogoImage src={""} />
+            <p>Meu Endereço</p>
+            <SignAdressForm />
+        </ScreenContainer>
+    )
 }
+
+export default SignAdressPage

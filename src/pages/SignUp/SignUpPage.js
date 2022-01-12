@@ -10,6 +10,7 @@ const SignUpPage = () => {
     return (
         <ScreenContainer>
             <LogoImage src={""} />
+            <p>Cadastrar</p>
             <SignUpForm />
         </ScreenContainer>
     )

@@ -1,49 +1,59 @@
 import React, { useState } from "react"
-import { InputsContainer, LoginFormContainer } from "./styled"
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button';
-import useForm from '../../hooks/useForm'
-import { login } from "../../services/user"
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+
+import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress'
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 
+import { login } from "../../services/user"
+import { InputsContainer, LoginFormContainer } from "./styled"
+import InputRHF from "../../components/RHF/InputRHF";
+import InputPasswordRHF from "../../components/RHF/InputPasswordRHF";
 
-const LoginForm = ({ setRightButtonText }) => {
-    const [form, onChange, clear] = useForm({ email: "", password: "" })
+const mode = 'onSubmit';
+
+const defaultValues = {
+    email: '',
+    password: '',
+}
+
+const schema = {
+    mode,
+    defaultValues,
+    resolver: yupResolver(
+        yup.object().shape({
+            email: yup.string().email('Digite um e-mail válido').required('E-mail é obrigatório'),
+            password: yup.string().min(6, 'Tamanho mínimo 6 caracteres').required('Senha é obrigatória'),
+        }).required()
+    )
+}
+const LoginForm = () => {
+    const form = useForm(schema);
+    const { control, handleSubmit } = form;
     const history = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
 
-    const onSubmitForm = (event) => {
-        event.preventDefault()
-        login(form, clear, history, setRightButtonText, setIsLoading)
+    const onSubmit = () => {
+        login(form.getValues(), form.reset(), history, setIsLoading)
     }
 
     return (
         <LoginFormContainer>
-            <form onSubmit={onSubmitForm}>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
                 <InputsContainer>
-                    <TextField
-                        name="email"
-                        value={form.email}
-                        onChange={onChange}
-                        label="E-mail"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        required
-                        type="email"
+                    <InputRHF
+                        name='email'
+                        label={'E-mail'}
+                        control={control}
                     />
-                    <TextField
-                        name="password"
-                        value={form.password}
-                        onChange={onChange}
-                        label="Senha"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        required
-                        type="password"
+                                       <InputPasswordRHF
+                        name='password'
+                        label={'Senha'}
+                        control={control}
                     />
+
                 </InputsContainer>
                 <Button
                     type={"submit"}
