@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
-import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG} from "./styled";
+import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll} from "./styled";
 
 export default function CartPage() {
 
@@ -9,6 +9,8 @@ export default function CartPage() {
     const [restaurant, setRestaurant] = useState([])
     const [restaurantData, setRestaurantData] = useState("")
     const [address, setAddress] = useState()
+    const [id, setId] = useState()
+    const [paymentMethod, setPaymentMethod] = useState()
 
     let total = 0
     useEffect(() => {
@@ -50,6 +52,37 @@ export default function CartPage() {
         })
     }
 
+    // const placeOrder = () => {
+
+    //     axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/${id}/order`, {
+    //         headers: {
+    //             auth: token
+    //         }
+    //     })
+    //     .then((res) => {
+    //         console.log(res.data)
+    //     })
+    //     .catch((err) => {
+    //         console.log(err.response.data)
+    //     })
+    // }
+
+    // const getActiveOrder = () => {
+
+
+    //     axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/active-order`, {
+    //         headers: {
+    //             auth: token
+    //         }
+    //     })
+    //     .then((res) => {
+    //         console.log(res.data)
+    //     })
+    //     .catch((err) => {
+    //         console.log(err.response.data)
+    //     })
+    // }
+
     restaurant.forEach((rest) => {
         total = total + rest.price
     })
@@ -63,21 +96,25 @@ export default function CartPage() {
                 <ImG src={rest.photoUrl} alt="rest.name"/>
             </DivImage>
             <DivDescription>
-                <div>
-                    <p>{rest.quantidade}</p>
-                </div>
-                <div>
-                    <p>{rest.name}</p>
-                    <p>{rest.description}</p>
-                    <p>R${rest.price.toFixed(2)}</p>
-                </div>
-                <div>
+                
+                
+                    <span>2</span>
+                    <span>{rest.name}</span>
+                    <span>{rest.description}</span>
+                    <span>R${rest.price.toFixed(2)}</span>
+                
+                
                     <button>Remover</button>
-                </div>
+                
             </DivDescription>
         </DivItem>
         )
     })
+
+    const onChangePaymentMethods = (e) => {
+        console.log(e.target.value)
+        setPaymentMethod(e.target.value)
+    }
 
  return(
   <DivMain>
@@ -85,33 +122,49 @@ export default function CartPage() {
         <h3>Meu carrinho</h3>
       </DivHeader>
 
-      <DivAdress>
-        <p>Endereco de entrega</p>
-        <p>{address && address.street}, {address && address.number}</p>
-      </DivAdress>
+      <DivScroll>
+        <DivAdress>
+            <Span1>Endereco de entrega</Span1>
+            <Span2>{address && address.street}, {address && address.number}</Span2>
+        </DivAdress>
 
-      <DivRestaurant>
-        <h5>{restaurantData.name}-</h5>
-        <h5>{restaurantData.address}-</h5>
-        <h5>{restaurantData.deliveryTime - 10}-{restaurantData.deliveryTime}min-</h5>
-      </DivRestaurant>
+        <DivRestaurant>
+            <Span3>{restaurantData.name}</Span3>
+            <Span4>{restaurantData.address}</Span4>
+            <Span5>{restaurantData.deliveryTime - 10} - {restaurantData.deliveryTime} min</Span5>
+        </DivRestaurant>
 
-      <DivItems>
-        {renderRestaurant}
-      </DivItems>
+        <DivItems>
+            {renderRestaurant}
+        </DivItems>
 
-      <DivDelivery>
-        <p>Frete R$ {restaurantData.shipping}</p>
-      </DivDelivery>
+        <DivDelivery>
+            <Span6>Frete R${restaurantData.shipping}</Span6>
+        </DivDelivery>
 
-      <DivSubTotal>
-          <p>Subtotal</p>
-          <p>RS{total.toFixed(2)}</p>
-      </DivSubTotal>
+        <DivSubTotal>
+            <Span7>Subtotal</Span7>
+            <Span8>RS{total.toFixed(2)}</Span8>
+        </DivSubTotal>
 
-      <DivPaymentMethods>
+        <DivPaymentMethods>
+            <Span9>Forma de pagamento</Span9>
 
-      </DivPaymentMethods>
+            <div>
+                <input type="radio" defaultChecked name="checked" value="dinheiro" onChange={onChangePaymentMethods}/>
+                <label>Dinheiro</label>
+            </div>
+            
+            <div>
+                <input type="radio" name="checked" value="cartao" onChange={onChangePaymentMethods}/>
+                <label>Cartao de credito</label>
+            </div>
+        </DivPaymentMethods>
+
+        <DivButton>
+            <Button>Confirmar</Button>
+        </DivButton>
+      </DivScroll>
   </DivMain>
  )
 }
