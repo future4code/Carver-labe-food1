@@ -10,7 +10,7 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import EditProfilePage from "../pages/EditProfilePage/EditProfilePage";
 import EditAdressPage from "../pages/EditAdressPage/EditAdressPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer/Footer";
 
 export default function Router() {
     return (

@@ -4,12 +4,16 @@ export const ProfileMainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 60px;
 `
 
 export const ProfileHeaderContainer = styled.div`
+    position: fixed;
+    top: 0;
     width: 100%;
     height: 64px;
     box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);
+    background-color: #FFF;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -26,6 +30,7 @@ export const ProfileHeaderTextContainer = styled.div`
 
 export const ProfileInfoContainer = styled.div`
     margin: 15px;
+    margin-top: calc(15px + 64px);
     width: 100%;
     height: fit-content;
     display: flex;
