@@ -10,8 +10,8 @@ export function goToSignAdressPage(history) {
 export function goToHomePage(history) {
  history('/')
 }
-export function goToRestaurantPage(history) {
- history('/restaurante/:id')
+export function goToRestaurantPage(history, id) {
+ history(`/restaurante/${id}`)
 }
 export function goToCartPage(history) {
  history('/carrinho')
