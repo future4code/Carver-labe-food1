@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios"
-import { BASE_URL } from "../../constants/url";
+import React, { useContext, useState, useEffect } from "react";
+import { GlobalContext } from "../../contexts/GlobalStateContext";
+import { getRestaurantDetail } from "../../services/restaurants"
 import { BodyContainer, ProductsContainer } from "./styled";
 import RestaurantDetail from "./RestaurantsDetail";
 import CardProduct from "../../components/CardProduct/CardProduct";
@@ -10,25 +10,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 export default function RestaurantPage() {
+ const { states, setters, requests } = useContext(GlobalContext);
  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlZQeEdXbXdoTndEWG9tNXcwTjJWIiwibmFtZSI6IlJlbmFuIExvcHJlc3RpIExhZ2UiLCJlbWFpbCI6InJlbmFuQGdtYWlsLmNvbSIsImNwZiI6IjQ2NC42OTYuNDQ4LTEzIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTY0MTkxNTk2OH0.CrRdwYsmSSZtqA8xpt3NuIoLPMPEcB9bhqN7eOaT2ao"
  const [restaurant, setRestaurant] = useState({})
  const [products, setProducts] = useState()
  const [cat, setCat] = useState([])
-
- const getRestaurantDetail = () => {
-  axios.get(`${BASE_URL}restaurants/2`, {
-   headers: {
-    auth: token,
-   }
-  })
-   .then((res) => {
-    setRestaurant(res.data.restaurant)
-    setProducts(getCategorys(res.data.restaurant.products, "category"))
-   })
-   .catch((err) => {
-    console.log(err.response)
-   })
- }
 
  const getCategorys = (array, object) => {
   let array1 = []
@@ -45,32 +31,35 @@ export default function RestaurantPage() {
  }
 
  const renderProducts = () => {
-  cat && (cat.map((i) => {
-   return (
-    <div key={i}>
-     <p>{i}</p>
-     {products && (
-      products.i.map((product) => {
-       return (
-         <CardProduct
-          key={product.id}
-          product={product}
-         />
-       )
-      })
-     )
-     }
-    </div>
-   )
-  }))
+  return (cat && cat.forEach(element => {
+   return (<p>{element}</p>)
+  }));
  }
- 
- console.log(products)
- console.log(cat)
 
+ const putProductInCart = (product) => {
+  let quant
+  let newProduct
+  let newArray
+  const index = states.cart.findIndex((item) => item.id === product.id)
+  if (index != -1) {
+   console.log("tem no carrinho")
+   quant = states.cart[index].quantity + 1
+   newProduct = { ...states.cart[index], quantity: quant }
+   newArray = [...states.cart, newProduct]
+   setters.setCart(newArray)
+   console.log(newProduct)
+  } else {
+   console.log("não tem no carrinho")
+   newProduct = { ...product, quantity: 1 }
+   newArray = [...states.cart, newProduct]
+   setters.setCart(newArray)
+  }
+ }
+ console.log(states.cart)
  useEffect(() => {
-  getRestaurantDetail()
+  getRestaurantDetail("1", setRestaurant, setProducts, getCategorys, token)
  }, [])
+
  return (
   <BodyContainer>
    <AppBar color="secondary">
@@ -93,7 +82,6 @@ export default function RestaurantPage() {
     />
    )}
    <ProductsContainer>
-
     {restaurant && restaurant.products && (
      <p>{restaurant.products[0].category}</p>
     )}
@@ -102,6 +90,7 @@ export default function RestaurantPage() {
       <CardProduct
        key={product.id}
        product={product}
+       functionButton={putProductInCart}
       />
      )
     }))}
