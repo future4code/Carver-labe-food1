@@ -14,7 +14,8 @@ export const InputsContainer = styled.div`
   width: 80vw;
   max-width: 450px;
   align-items: center;
-  margin-bottom: 20px;
+  gap: 18px;
+  margin-bottom: 24px;
 `
 
 export const SignUpFormContainer = styled.div`

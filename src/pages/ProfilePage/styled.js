@@ -53,6 +53,8 @@ export const ProfileAddressContainer = styled.div`
 `
 
 export const ProfileAddressTextContainer = styled.div`
+
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,4 +74,15 @@ export const ProfileAddressIconContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+`
+
+export const ProfileOrderHistoryContainer = styled.div`
+    width: 91.12%;
+    height: 34px;
+    margin-top: 7px;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+
 `

@@ -9,6 +9,7 @@ export default function Footer() {
     const pathname = window.location.pathname
     console.log(pathname)
 
+
     return (
         <FooterMainContainer>
             <FooterNavContainer>
