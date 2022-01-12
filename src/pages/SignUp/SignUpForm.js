@@ -1,120 +1,92 @@
 import React, { useState } from 'react'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import { InputsContainer, SignUpFormContainer } from './styled'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import useForm from '../../hooks/useForm'
-import { signUp } from "../../services/user"
+
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import Button from '@material-ui/core/Button'
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { validateCPF } from 'validations-br'
+
+import { InputsContainer, SignUpFormContainer } from './styled'
+import { signUp } from "../../services/user"
+import InputRHF from '../../components/RHF/InputRHF'
+import InputMaskRHF from '../../components/RHF/InputMaskRHF'
+import InputPasswordRHF from '../../components/RHF/InputPasswordRHF'
+
+const mode = 'onSubmit';
+
+const defaultValues = {
+    name: '',
+    email: '',
+    cpf: '',
+    password: '',
+    confirmPassword: ''
+}
+
+const schema = {
+    mode,
+    defaultValues,
+    resolver: yupResolver(
+        yup.object().shape({
+            name: yup.string().required('Nome é obrigatório'),
+            email: yup.string().email('Digite um e-mail válido').required('E-mail é obrigatório'),
+            cpf: yup.string().required('CPF é obrigatório')
+                .test('cpf', 'CPF inválido.', value => value && value.replace(/[^0-9]/g, '').length === 11 ? validateCPF(value) : true),
+            password: yup.string().min(6, 'Tamanho mínimo 6 caracteres').required('Senha é obrigatória'),
+            confirmPassword: yup.string().oneOf([yup.ref("password"), null], 'Deve ser a mesma que a anterior')
+        }).required()
+    )
+}
 
 const SignUpForm = () => {
     const history = useNavigate()
-    const [form, onChange, clear] = useForm({ name: '', email: '' })
     const [isLoading, setIsLoading] = useState(false)
-    const [values, setValues] = useState({
-        showPassword: false,
-        password: "",
-        passConfirm: ''
-    });
-    const onSubmitForm = (event) => {
-        event.preventDefault()
-        signUp(form, clear, history, setIsLoading)
+
+    const form = useForm(schema);
+    const { control, handleSubmit } = form;
+
+    const onSubmit = () => {
+        signUp(form.getValues(), form.reset(), history, setIsLoading);
     }
-    const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword,
-        });
-    };
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+
     return (
-        <form onSubmit={onSubmitForm}>
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
             <SignUpFormContainer>
                 <InputsContainer>
-                    <TextField
-                        value={form.name}
-                        name={'name'}
-                        onChange={onChange}
-                        label={'Nome'}
-                        variant={'outlined'}
-                        fullWidth
-                        required
-                        autoFocus
-                        margin={'normal'}
+
+                    <InputRHF
+                        name="name"
+                        label="Nome"
+                        control={control}
+
                     />
-                    <TextField
-                        value={form.email}
-                        name={'email'}
-                        onChange={onChange}
+                    <InputRHF
+                        name='email'
                         label={'E-mail'}
-                        variant={'outlined'}
-                        type={'email'}
-                        fullWidth
-                        required
-                        margin={'normal'}
+                        control={control}
                     />
-                    <TextField
-                        value={form.cpf}
-                        name={'cpf'}
-                        onChange={onChange}
+
+                    <InputMaskRHF
+                        name='cpf'
                         label={'CPF'}
-                        variant={'outlined'}
-                        type={'number'}
-                        fullWidth
-                        required
-                        margin={'normal'}
+                        mask="999.999.999-99"
+                        control={control}
                     />
-                    <FormControl fullWidth required variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label="Password"
-                        />
-                    </FormControl>
-                    <FormControl fullWidth required variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Confirmar</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.passConfirm}
-                            onChange={handleChange('passConfirm')}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        <VisibilityOff />
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label="Confirmar"
-                        />
-                    </FormControl>
+
+                    <InputPasswordRHF
+                        name='password'
+                        label={'Senha'}
+                        control={control}
+                    />
+
+
+                    <InputPasswordRHF
+                        name='confirmPassword'
+                        label={'Confirm. Senha'}
+                        control={control}
+                    />
+
                 </InputsContainer>
                 <Button
                     color={'primary'}
