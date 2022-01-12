@@ -12,35 +12,75 @@ import Typography from '@mui/material/Typography';
 export default function RestaurantPage() {
  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlZQeEdXbXdoTndEWG9tNXcwTjJWIiwibmFtZSI6IlJlbmFuIExvcHJlc3RpIExhZ2UiLCJlbWFpbCI6InJlbmFuQGdtYWlsLmNvbSIsImNwZiI6IjQ2NC42OTYuNDQ4LTEzIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTY0MTkxNTk2OH0.CrRdwYsmSSZtqA8xpt3NuIoLPMPEcB9bhqN7eOaT2ao"
  const [restaurant, setRestaurant] = useState({})
+ const [products, setProducts] = useState()
+ const [cat, setCat] = useState([])
 
  const getRestaurantDetail = () => {
-  axios.get(`${BASE_URL}restaurants/1`, {
+  axios.get(`${BASE_URL}restaurants/2`, {
    headers: {
     auth: token,
    }
   })
    .then((res) => {
     setRestaurant(res.data.restaurant)
+    setProducts(getCategorys(res.data.restaurant.products, "category"))
    })
    .catch((err) => {
     console.log(err.response)
    })
  }
 
+ const getCategorys = (array, object) => {
+  let array1 = []
+  return array.reduce(function (acc, obj) {
+   let key = obj[object];
+   if (!acc[key]) {
+    acc[key] = [];
+    array1.push(key)
+   }
+   setCat(array1)
+   acc[key].push(obj);
+   return acc;
+  }, {});
+ }
+
+ const renderProducts = () => {
+  cat && (cat.map((i) => {
+   return (
+    <div key={i}>
+     <p>{i}</p>
+     {products && (
+      products.i.map((product) => {
+       return (
+         <CardProduct
+          key={product.id}
+          product={product}
+         />
+       )
+      })
+     )
+     }
+    </div>
+   )
+  }))
+ }
+ 
+ console.log(products)
+ console.log(cat)
+
  useEffect(() => {
   getRestaurantDetail()
  }, [])
-
  return (
   <BodyContainer>
    <AppBar color="secondary">
     <Toolbar>
      <ArrowBackIosNewIcon
       size="large"
-      color="black"
-      sx={{ mr: 1 }}
+      sx={{ color: "black", mr: 2 }}
      />
      <Typography
+      sx={{ position: "relative", left: "-20px", margin: "0 auto" }}
       color="black"
       component="div"
       variant="h6"
@@ -53,6 +93,10 @@ export default function RestaurantPage() {
     />
    )}
    <ProductsContainer>
+
+    {restaurant && restaurant.products && (
+     <p>{restaurant.products[0].category}</p>
+    )}
     {restaurant && restaurant.products && (restaurant.products.map((product) => {
      return (
       <CardProduct
