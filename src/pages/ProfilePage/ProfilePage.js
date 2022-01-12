@@ -13,7 +13,7 @@ import {
 import axios from 'axios'
 import { BASE_URL } from '../../constants/url'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import OrderHistoryItem from "../../components/OrderHistoryItem"
+import OrderHistoryItem from "../../components/OrderHistoryItem/OrderHistoryItem"
 import { token } from "../../constants/tempTokenCesar"
 
 
@@ -33,7 +33,6 @@ export default function ProfilePage() {
         .catch((err) => {
             console.log(err)
         })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -63,7 +62,7 @@ export default function ProfilePage() {
             <ProfileOrderHistoryContainer>
                 Histórico de Pedidos
             </ProfileOrderHistoryContainer>
-            <OrderHistoryItem /> {/*falta fazer o map de cada item*/}
+            <OrderHistoryItem />
         </ProfileMainContainer>
     )
 }
