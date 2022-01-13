@@ -32,3 +32,11 @@ export const OrderHistoryItemContainer = styled.div`
         font-size: 12px;
     }
 `
+
+export const BlankOrderHistoryContainer = styled.div`
+    height: 42px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
