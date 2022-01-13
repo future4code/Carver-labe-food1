@@ -1,8 +1,11 @@
 import React from 'react'
 import { FooterMainContainer, FooterNavContainer } from './styled'
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined'
+import activeAvatar from '../../assets/NavIcons/active_avatar.svg'
+import activeHomepage from '../../assets/NavIcons/active_homepage.svg'
+import activeCart from '../../assets/NavIcons/active_shopping-cart.svg'
+import unactiveAvatar from '../../assets/NavIcons/unactive_avatar.svg'
+import unactiveHomepage from '../../assets/NavIcons/unactive_homepage.svg'
+import unactiveCart from '../../assets/NavIcons/unactive_shopping-cart.svg'
 
 export default function Footer() {
 
@@ -11,13 +14,13 @@ export default function Footer() {
     return (
         <FooterMainContainer>
             <FooterNavContainer>
-                <HomeOutlinedIcon sx={{fontSize: 30}} color={pathname === '/' ? 'primary' : 'disabled'} />
+                <img src={pathname === '/' ? activeHomepage : unactiveHomepage } alt='Home Icon' />
             </FooterNavContainer>   
             <FooterNavContainer>
-                <ShoppingCartOutlinedIcon sx={{fontSize: 30}} color={pathname === '/carrinho' ? 'primary' : 'disabled'} />
+                <img src={pathname === '/carrinho' ? activeCart : unactiveCart } alt='Cart Icon' />
             </FooterNavContainer>  
             <FooterNavContainer>
-                <PermIdentityOutlinedIcon sx={{fontSize: 30}} color={pathname === '/perfil' ? 'primary' : 'disabled'} />
+                <img src={pathname === '/perfil' ? activeAvatar : unactiveAvatar } alt='Avatar Icon' />
             </FooterNavContainer>  
         </FooterMainContainer>
     )
