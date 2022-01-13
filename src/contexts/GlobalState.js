@@ -10,7 +10,6 @@ const GlobalState = (props) => {
  const states = { cart, isLoading, restaurant, categorys }
  const setters = { setIsLoading, setCart, setRestaurant, setCategorys }
  const requests = {}
- console.log(cart)
  return (
   <GlobalContext.Provider value={{ states, setters, requests }}>
    {props.children}
