@@ -15,14 +15,16 @@ export default function Footer() {
 
     return (
         <FooterMainContainer>
-            <FooterNavContainer onClick={() => {goToHomePage(history)}}>
-                <img src={pathname === '/' ? activeHomepage : unactiveHomepage } alt='Home Icon' />
+            <FooterNavContainer  onClick={() => {goToHomePage(history)}}>
+                <img src={pathname === '/' || pathname === '/restaurante/:id' ? activeHomepage : unactiveHomepage } alt='Home Icon' />
+
             </FooterNavContainer>   
             <FooterNavContainer onClick={() => {goToCartPage(history)}}>
                 <img src={pathname === '/carrinho' ? activeCart : unactiveCart } alt='Cart Icon' />
             </FooterNavContainer>  
+
             <FooterNavContainer onClick={() => {goToProfilePage(history)}}>
-                <img src={pathname === '/perfil' ? activeAvatar : unactiveAvatar } alt='Avatar Icon' />
+                <img src={pathname === '/perfil' || pathname === '/perfil/editar' || pathname === '/endereco/editar' ? activeAvatar : unactiveAvatar } alt='Avatar Icon' />
             </FooterNavContainer>  
         </FooterMainContainer>
     )
