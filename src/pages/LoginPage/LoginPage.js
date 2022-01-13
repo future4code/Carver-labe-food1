@@ -1,12 +1,12 @@
-import React from "react"
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 
-import { goToSignUpPage } from "../../routes/coordinator"
-import LoginForm from "./LoginForm"
-import { ScreenContainer, LogoImage, SignUpButtonContainer } from "./styled"
-import logo from "../../assets/logo.png"
+import { goToSignUpPage } from "../../routes/coordinator";
+import LoginForm from "./LoginForm";
+import { ScreenContainer, LogoImage, SignUpButtonContainer } from "./styled";
+import logo from "../../assets/logo.png";
 import useUnprotectedPage from '../../hooks/useUnprotectedPage';
 
 const LoginPage = () => {
@@ -28,7 +28,7 @@ const LoginPage = () => {
                 </Button>
             </SignUpButtonContainer>
         </ScreenContainer>
-    )
-}
+    );
+};
 
-export default LoginPage
+export default LoginPage;

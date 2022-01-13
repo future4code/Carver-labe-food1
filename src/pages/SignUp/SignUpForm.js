@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { validateCPF } from 'validations-br'
+import { validateCPF } from 'validations-br';
 
-import { signUp } from "../../services/user"
-import InputRHF from '../../components/RHF/InputRHF'
-import InputMaskRHF from '../../components/RHF/InputMaskRHF'
-import InputPasswordRHF from '../../components/RHF/InputPasswordRHF'
-import { Box, Typography } from '@mui/material'
+import { signUp } from "../../services/user";
+import InputRHF from '../../components/RHF/InputRHF';
+import InputMaskRHF from '../../components/RHF/InputMaskRHF';
+import InputPasswordRHF from '../../components/RHF/InputPasswordRHF';
+import { Box, Typography } from '@mui/material';
 
 const mode = 'onSubmit';
 
@@ -22,7 +22,7 @@ const defaultValues = {
     cpf: '',
     password: '',
     confirmPassword: ''
-}
+};
 
 const schema = {
     mode,
@@ -37,18 +37,18 @@ const schema = {
             confirmPassword: yup.string().oneOf([yup.ref("password"), null], 'Deve ser a mesma que a anterior')
         }).required()
     )
-}
+};
 
 const SignUpForm = () => {
-    const history = useNavigate()
-    const [isLoading, setIsLoading] = useState(false)
+    const history = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm(schema);
     const { control, handleSubmit } = form;
 
     const onSubmit = () => {
         signUp(form.getValues(), form.reset(), history, setIsLoading);
-    }
+    };
 
     return (
         <Box
@@ -109,7 +109,7 @@ const SignUpForm = () => {
                 {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Criar</>}
             </Button>
         </Box>
-    )
-}
+    );
+};
 
-export default SignUpForm
+export default SignUpForm;
