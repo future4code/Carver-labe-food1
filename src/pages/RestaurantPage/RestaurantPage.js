@@ -28,16 +28,14 @@ export default function RestaurantPage() {
    newArray = [...states.cart, newProduct]
    newArray.splice(index, 1)
    setters.setCart(newArray)
+   localStorage.setItem("cart", JSON.stringify(newArray))
   } else {
    newProduct = { ...product, quantity: 1 }
    newArray = [...states.cart, newProduct]
    setters.setCart(newArray)
+   localStorage.setItem("cart", JSON.stringify(newArray))
   }
-
   alert("produto adicionado no carrinho")
-
-  localStorage.setItem("cart", JSON.stringify(states.cart))
-
  }
 
  console.log(states.isLoading)
