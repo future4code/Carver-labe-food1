@@ -9,11 +9,14 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { Step } from "@mui/material";
 
 export default function RestaurantPage() {
  const params = useParams()
  const { states, setters, requests } = useContext(GlobalContext);
  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlZQeEdXbXdoTndEWG9tNXcwTjJWIiwibmFtZSI6IlJlbmFuIExvcHJlc3RpIExhZ2UiLCJlbWFpbCI6InJlbmFuQGdtYWlsLmNvbSIsImNwZiI6IjQ2NC42OTYuNDQ4LTEzIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTY0MTkxNTk2OH0.CrRdwYsmSSZtqA8xpt3NuIoLPMPEcB9bhqN7eOaT2ao"
+
+  console.log(params.id)
 
  const putProductInCart = (product) => {
   let quant
@@ -32,6 +35,7 @@ export default function RestaurantPage() {
    setters.setCart(newArray)
   }
   localStorage.setItem("cart", JSON.stringify(states.cart))
+  setters.setIdRestaurant(params.id)
  }
  const getCategorys = (array) => {
   let arr = [];

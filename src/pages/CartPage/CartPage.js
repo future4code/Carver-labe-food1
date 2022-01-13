@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalStateContext"
 import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10} from "./styled";
 import { SettingsPowerSharp } from "@mui/icons-material";
+import { goToHomePage } from "../../routes/coordinator";
 
 export default function CartPage() {
 
+    const navigate = useNavigate()
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IklzTFl5UjlMNW5zemNHRGQ4bmlKIiwibmFtZSI6IkFuZHLDqSBNYXJxdWVzIiwiZW1haWwiOiJhbmRyZW1hcnF1ZXNAZ21haWwuY29tIiwiY3BmIjoiMjIyLDIyMiwyMjItMjIiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUnVhIEpvYXF1aW0gRmVybmFuZGVzLCAyMTEsIDcxIC0gVmlsYSBOb2d1ZWlyYSIsImlhdCI6MTY0MTg1NDQ0M30.NGAp6nbdH24nsPQ9lQxUSd_zOpeQwB2sbbRHrkJ-EJs"
     const aaa = "rappi4A"
     const [restaurantData, setRestaurantData] = useState("")
@@ -39,7 +42,7 @@ export default function CartPage() {
 
     const getRestaurant = () => {
 
-        axios.get(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/1`, {
+        axios.get(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/${states.idRestaurant}`, {
             headers: {
                 auth: token,
             }
@@ -74,7 +77,7 @@ export default function CartPage() {
         const body = order
         console.log(body)
 
-        axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/1/order`, body, {
+        axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/${states.idRestaurant}/order`, body, {
             headers: {
                 auth: token
             }
@@ -82,9 +85,12 @@ export default function CartPage() {
         .then((res) => {
             console.log(res.data)
             setters.cart("")
+            alert("Pedido efetuado com sucesso!")
+            goToHomePage(navigate)
         })
         .catch((err) => {
             alert(err.response.data.message)
+            goToHomePage(navigate)
         })
     }
 
@@ -136,9 +142,18 @@ export default function CartPage() {
         setPaymentMethod(e.target.value)
     }
 
-    const deleteItemCart = () => {
-
-    }
+    // const deleteItemCart = (id) => {
+    //     console.log(id)
+    //     for(let i = 0; i < cart.lenght; i++){
+    //         if(cart[i].id === id){
+    //             if(cart[i].quantity > 1){
+    //                 cart[i].quantity = cart[i].quantity -1
+    //             }
+    //         } else {
+    //             cart.splice(cart[i], 1)
+    //         }
+    //     }
+    // }
 
  return(
   <DivMain>
