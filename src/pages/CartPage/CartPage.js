@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
-import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll} from "./styled";
+import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10} from "./styled";
 
 export default function CartPage() {
 
@@ -26,7 +26,6 @@ export default function CartPage() {
             }
         })
         .then((res) => {
-            console.log(res.data)
             setRestaurant(res.data.restaurant.products)
             setRestaurantData(res.data.restaurant)
         })
@@ -43,7 +42,6 @@ export default function CartPage() {
             }
         })
         .then((res) => {
-            console.log(res.data.address)
             setAddress(res.data.address)
             
         })
@@ -98,13 +96,13 @@ export default function CartPage() {
             <DivDescription>
                 
                 
-                    <span>2</span>
-                    <span>{rest.name}</span>
-                    <span>{rest.description}</span>
-                    <span>R${rest.price.toFixed(2)}</span>
+                    <SpanRest1>2</SpanRest1>
+                    <SpanRest2>{rest.name}</SpanRest2>
+                    <SpanRest3>{rest.description}</SpanRest3>
+                    <SpanRest4>R${rest.price.toFixed(2)}</SpanRest4>
                 
                 
-                    <button>Remover</button>
+                    <ButtonRest>Remover</ButtonRest>
                 
             </DivDescription>
         </DivItem>
@@ -112,7 +110,6 @@ export default function CartPage() {
     })
 
     const onChangePaymentMethods = (e) => {
-        console.log(e.target.value)
         setPaymentMethod(e.target.value)
     }
 
@@ -143,22 +140,22 @@ export default function CartPage() {
         </DivDelivery>
 
         <DivSubTotal>
-            <Span7>Subtotal</Span7>
+            <Span7>SUBTOTAL</Span7>
             <Span8>RS{total.toFixed(2)}</Span8>
         </DivSubTotal>
 
         <DivPaymentMethods>
             <Span9>Forma de pagamento</Span9>
-
-            <div>
+            <Span10></Span10>
+            <DivRadio>
                 <input type="radio" defaultChecked name="checked" value="dinheiro" onChange={onChangePaymentMethods}/>
                 <label>Dinheiro</label>
-            </div>
+            </DivRadio>
             
-            <div>
+            <DivRadio>
                 <input type="radio" name="checked" value="cartao" onChange={onChangePaymentMethods}/>
                 <label>Cartao de credito</label>
-            </div>
+            </DivRadio>
         </DivPaymentMethods>
 
         <DivButton>

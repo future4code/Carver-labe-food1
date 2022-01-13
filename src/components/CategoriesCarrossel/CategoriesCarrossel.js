@@ -20,9 +20,9 @@ export default function CategoriesCarrossel(props) {
                 value={value}
                 scrollButtons={false}
             >
-                <Tab onClick={() => handleCategory("Hamburguer")} label="Hamburguer" />
-                <Tab onClick={() => handleCategory("Asiática")} label="Asiática" />
                 <Tab onClick={() => handleCategory("Árabe")} label="Árabe" />
+                <Tab onClick={() => handleCategory("Asiática")} label="Asiática" />
+                <Tab onClick={() => handleCategory("Hamburguer")} label="Hamburguer" />    
                 <Tab onClick={() => handleCategory("Italiana")} label="Italiana" />
                 <Tab onClick={() => handleCategory("Sorvetes")} label="Sorvetes" />
                 <Tab onClick={() => handleCategory("Carnes")} label="Carnes" />

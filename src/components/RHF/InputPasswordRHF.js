@@ -5,7 +5,7 @@ import { useController } from "react-hook-form";
 
 
 const InputPasswordRHF = (props) => {
-    const { label, required, name, control, sx } = props;
+    const { label, required, name, control, sx, placeholder } = props;
     const { field, fieldState: { invalid, error } } = useController({ name, control });
     const { ref } = field;
 
@@ -26,7 +26,6 @@ const InputPasswordRHF = (props) => {
 
     return (
         <FormControl
-            fullWidth
             variant="outlined"
         >
             <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
@@ -39,6 +38,7 @@ const InputPasswordRHF = (props) => {
                 error={invalid}
                 required={Boolean(required)}
                 sx={{ sx }}
+                placeholder={placeholder}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton

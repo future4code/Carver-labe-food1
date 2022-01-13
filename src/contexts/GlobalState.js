@@ -2,21 +2,18 @@ import React, { useState } from "react";
 import { GlobalContext } from "./GlobalStateContext";
 
 const GlobalState = (props) => {
-    const [isLoading, setIsLoading] = useState(true);
+ const [isLoading, setIsLoading] = useState(true);
+ const [cart, setCart] = useState([])
 
-    const states = {
-      isLoading
-    }
+ const states = { cart, isLoading }
+ const setters = { setIsLoading, setCart }
+ const requests = {}
 
-    const setters = {
-      setIsLoading
-    }
-
-return (
-    <GlobalContext.Provider value={{states, setters}}>
-      {props.children}
-    </GlobalContext.Provider>
-  );
+ return (
+  <GlobalContext.Provider value={{ states, setters, requests }}>
+   {props.children}
+  </GlobalContext.Provider>
+ );
 };
 
 export default GlobalState;

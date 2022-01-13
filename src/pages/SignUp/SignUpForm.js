@@ -8,11 +8,11 @@ import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validateCPF } from 'validations-br'
 
-import { InputsContainer, SignUpFormContainer } from './styled'
 import { signUp } from "../../services/user"
 import InputRHF from '../../components/RHF/InputRHF'
 import InputMaskRHF from '../../components/RHF/InputMaskRHF'
 import InputPasswordRHF from '../../components/RHF/InputPasswordRHF'
+import { Box, Typography } from '@mui/material'
 
 const mode = 'onSubmit';
 
@@ -51,53 +51,64 @@ const SignUpForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-            <SignUpFormContainer>
-                <InputsContainer>
+        <Box
+            onSubmit={handleSubmit(onSubmit)}
+            autoComplete='off'
+            component='form'
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '84%',
+                gap: '16px',
+                pb: '28px'
+            }}
+        >
+            <Typography
+                variant="h6"
+                textAlign={'center'}
+            >Cadastrar</Typography>
 
-                    <InputRHF
-                        name="name"
-                        label="Nome"
-                        control={control}
+            <InputRHF
+                name="name"
+                label="Nome"
+                control={control}
 
-                    />
-                    <InputRHF
-                        name='email'
-                        label={'E-mail'}
-                        control={control}
-                    />
+            />
+            <InputRHF
+                name='email'
+                label={'E-mail'}
+                control={control}
+            />
 
-                    <InputMaskRHF
-                        name='cpf'
-                        label={'CPF'}
-                        mask="999.999.999-99"
-                        control={control}
-                    />
+            <InputMaskRHF
+                name='cpf'
+                label={'CPF'}
+                mask="999.999.999-99"
+                control={control}
+            />
 
-                    <InputPasswordRHF
-                        name='password'
-                        label={'Senha'}
-                        control={control}
-                    />
+            <InputPasswordRHF
+                name='password'
+                label={'Senha'}
+                control={control}
+            />
 
 
-                    <InputPasswordRHF
-                        name='confirmPassword'
-                        label={'Confirm. Senha'}
-                        control={control}
-                    />
+            <InputPasswordRHF
+                name='confirmPassword'
+                label={'Confirm. Senha'}
+                control={control}
+            />
 
-                </InputsContainer>
-                <Button
-                    color={'primary'}
-                    variant={'contained'}
-                    type={'submit'}
-                    fullWidth
-                >
-                    {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Criar</>}
-                </Button>
-            </SignUpFormContainer>
-        </form>
+            <Button
+                color={'primary'}
+                variant={'contained'}
+                type={'submit'}
+                fullWidth
+            >
+                {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Criar</>}
+            </Button>
+        </Box>
     )
 }
 
