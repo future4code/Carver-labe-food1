@@ -14,6 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputRHF from '../../components/RHF/InputRHF';
 import { signAddress } from '../../services/user';
 import { BASE_URL } from "../../constants/url";
+import { goToProfilePage } from '../../routes/coordinator';
 //import { GlobalContext } from '../../contexts/GlobalStateContext';
 
 
@@ -88,6 +89,8 @@ const EditAddressForm = () => {
                     color="inherit"
                     aria-label="menu"
                     sx={{ mr: 15 }}
+                    onClick={() => goToProfilePage(history)}
+
                 >
                     <ArrowBackIosIcon />
                 </IconButton>

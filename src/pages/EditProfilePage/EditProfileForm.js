@@ -16,6 +16,7 @@ import InputRHF from '../../components/RHF/InputRHF';
 import InputMaskRHF from '../../components/RHF/InputMaskRHF';
 import { useGetProfileInfo } from '../../hooks/useGetProfileInfo';
 import { GlobalContext } from '../../contexts/GlobalStateContext';
+import { goToProfilePage } from '../../routes/coordinator';
 
 const mode = 'onSubmit';
 
@@ -68,6 +69,7 @@ const EditProfileForm = () => {
                     color="inherit"
                     aria-label="menu"
                     sx={{ mr: 15 }}
+                    onClick={() => goToProfilePage(history)}
                 >
                     <ArrowBackIosIcon />
                 </IconButton>
