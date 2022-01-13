@@ -6,9 +6,6 @@ import useRequestData from '../../hooks/useRequestData'
 import { BASE_URL } from '../../constants/url'
 import { Input, MainContainer, InputContainer, PageTittleContainer, TittleNavContainer } from "./styled"
 import SearchIcon from "../../assets/search.svg"
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { goToRestaurantPage } from "../../routes/coordinator"
@@ -58,7 +55,7 @@ export default function HomePage() {
 
     const restaurantsList = restaurants && restaurants
         .filter((restaurant) => {
-            return (restaurant.name.toLowerCase().includes(searchFor) && restaurant.category.includes(categories))
+            return ((restaurant.name.toLowerCase().includes(searchFor) || restaurant.name.includes(searchFor)) && restaurant.category.includes(categories))
         })
         .map((restaurant) => {
             return <RestaurantCard
@@ -72,16 +69,6 @@ export default function HomePage() {
 
     return (
         <MainContainer>
-            {/* <AppBar color="secondary">
-                <Toolbar>
-                    <Typography
-                        sx={{ position: "relative", margin: "0 auto"}}
-                        color="black"
-                        component="div"
-                        variant="h6"
-                    >Rappi4</Typography>
-                </Toolbar>
-            </AppBar> */}
             <PageTittleContainer>
                 <TittleNavContainer>
                     Rappi4
@@ -93,13 +80,14 @@ export default function HomePage() {
                     placeholder="Restaurante"
                     onChange={handleSearchBar}
                     value={searchFor}
-                    type="search"
-                    id="standard-search"
                 />
             </InputContainer>
             <CategoriesCarrossel
                 handleCategory={handleCategory}
             />
+            {/* {isLoading && <p>Carregando</p>} */}
+            {/* {!isLoading && restaurantsList && restaurantsList.leght > 0 && restaurantsList} */}
+            {/* {!isLoading && restaurantsList && restaurantsList.legth === 0 && (<h4>"Nenhum restaurante encontrado</h4>)} */}
             {restaurantsList.length > 0 ? restaurantsList : <h4>"Nenhum restaurante encontrado"</h4>}
         </MainContainer >
     )
