@@ -4,7 +4,7 @@ import { useController } from "react-hook-form";
 
 
 const InputRHF = (props) => {
-    const { label, required, name, control, sx } = props;
+    const { label, required, name, control, sx, placeholder, color} = props;
     const { field, fieldState: { invalid, error } } = useController({ name, control });
     const { ref } = field;
 
@@ -16,7 +16,10 @@ const InputRHF = (props) => {
             error={invalid}
             helperText={error?.message}
             required={Boolean(required)}
+            placeholder={placeholder}
+            variant='outlined'
             sx={{ sx }}
+            color={color}
         />
     )
 }

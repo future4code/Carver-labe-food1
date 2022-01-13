@@ -12,4 +12,4 @@ const useProtectedPage = () => {
   }, [history])
 }
 
-export default useProtectedPage
+export default useProtectedPage;

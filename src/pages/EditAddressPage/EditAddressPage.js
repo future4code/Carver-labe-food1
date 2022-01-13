@@ -1,13 +1,13 @@
 import React from "react";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { ScreenContainer } from "../SignUp/styled";
-import EditProfileForm from "./EditProfileForm";
+import EditAddressForm from "./EditAddressForm";
 
-export default function EditProfilePage() {
+export default function EditAddressPage() {
     useProtectedPage()
  return(
   <ScreenContainer>
-      <EditProfileForm/>
+   <EditAddressForm/>
   </ScreenContainer>
  )
 }
