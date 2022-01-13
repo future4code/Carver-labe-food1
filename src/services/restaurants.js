@@ -1,7 +1,7 @@
 import axios from "axios"
 import { BASE_URL } from "../constants/url"
 
-export const getRestaurantDetail = (id, setRestaurant, setProducts, getCategorys, token) => {
+export const getRestaurantDetail = (id, setRestaurant, token, getCategorys, setCategorys) => {
  axios.get(`${BASE_URL}restaurants/${id}`, {
   headers: {
    auth: token,
@@ -9,7 +9,7 @@ export const getRestaurantDetail = (id, setRestaurant, setProducts, getCategorys
  })
   .then((res) => {
    setRestaurant(res.data.restaurant)
-   setProducts(getCategorys(res.data.restaurant.products, "category"))
+   setCategorys(getCategorys(res.data.restaurant))
   })
   .catch((err) => {
    console.log(err.response)

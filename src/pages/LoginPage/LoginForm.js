@@ -1,13 +1,13 @@
-import React, { useState } from "react"
-import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress'
+import CircularProgress from '@mui/material/CircularProgress';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { login } from "../../services/user"
+import { login } from "../../services/user";
 import InputRHF from "../../components/RHF/InputRHF";
 import InputPasswordRHF from "../../components/RHF/InputPasswordRHF";
 import { Box, Typography } from "@mui/material";
@@ -17,7 +17,7 @@ const mode = 'onSubmit';
 const defaultValues = {
     email: '',
     password: '',
-}
+};
 
 const schema = {
     mode,
@@ -28,7 +28,7 @@ const schema = {
             password: yup.string().min(6, 'Tamanho mínimo 6 caracteres').required('Senha é obrigatória'),
         }).required()
     )
-}
+};
 const LoginForm = () => {
     const form = useForm(schema);
     const { control, handleSubmit } = form;
@@ -36,8 +36,8 @@ const LoginForm = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const onSubmit = () => {
-        login(form.getValues(), form.reset(), history, setIsLoading)
-    }
+        login(form.getValues(), history, setIsLoading)
+    };
 
     return (
 
@@ -79,14 +79,14 @@ const LoginForm = () => {
                 variant={"contained"}
                 color={"primary"}
             >
-                {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Fazer Login</>}
+                {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Entrar</>}
             </Button>
 
         </Box>
 
 
 
-    )
-}
+    );
+};
 
-export default LoginForm
+export default LoginForm;
