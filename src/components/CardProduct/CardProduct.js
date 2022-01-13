@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-export default function CardProduct({ product }) {
+export default function CardProduct({ product, functionButton }) {
 
  return (
   <Card sx={{ width: 305, display: 'flex' }}>
@@ -22,7 +22,7 @@ export default function CardProduct({ product }) {
      <Typography>{product.description}</Typography>
      <Typography>{`R$${product.price.toFixed(2)}`}</Typography>
     </CardContent>
-    <Button>Adicionar</Button>
+    <Button onClick={()=>functionButton(product)}>Adicionar</Button>
    </Box>
   </Card>
  )
