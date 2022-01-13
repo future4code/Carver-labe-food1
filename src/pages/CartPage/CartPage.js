@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios'
 import { GlobalContext } from "../../contexts/GlobalStateContext"
 import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10} from "./styled";
+import { SettingsPowerSharp } from "@mui/icons-material";
 
 export default function CartPage() {
 
@@ -9,10 +10,11 @@ export default function CartPage() {
     const aaa = "rappi4A"
     const [restaurantData, setRestaurantData] = useState("")
     const [address, setAddress] = useState()
-    const [paymentMethod, setPaymentMethod] = useState()
-    const [products, setProducts] = useState([{}])
-    const [id, setId] = useState()
-    const [quantity, setQuantity] = useState()
+    const [paymentMethod, setPaymentMethod] = useState("money")
+    let order = {
+        products: [],
+        paymentMethod: paymentMethod
+    }
     const { states, setters, requests } = useContext(GlobalContext);
 
     let total = 0
@@ -20,17 +22,20 @@ export default function CartPage() {
     useEffect(() => {
         getRestaurant()
         getAddress()
+        localStorage.getItem("cart")
+       
     }, [])
 
     const newCart = localStorage.getItem("cart")
     const cart = JSON.parse(newCart)
     console.log(cart)
 
-    // cart.forEach((item) => {
-    //     const prod = [...products, {id: item.id, quantity: item.quantity}]
-    //     setProducts(prod)
-    // })
-    // console.log(products)
+  
+    cart.forEach((item) => {
+    const prod = {id: item.id, quantity: item.quantity}
+    order.products.push(prod)
+    })
+    console.log(order)
 
     const getRestaurant = () => {
 
@@ -52,7 +57,7 @@ export default function CartPage() {
 
         axios.get(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/profile/address`, {
             headers: {
-                auth: token,
+                auth: token
             }
         })
         .then((res) => {
@@ -66,23 +71,20 @@ export default function CartPage() {
 
     const placeOrder = () => {
 
-        // const body = {{
-            
-        // }
-            
-        //     paymentMethod: paymentMethod
-        // }
+        const body = order
+        console.log(body)
 
-        axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/1/order`, {
+        axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/1/order`, body, {
             headers: {
                 auth: token
             }
         })
         .then((res) => {
             console.log(res.data)
+            setters.cart("")
         })
         .catch((err) => {
-            console.log(err.response.data)
+            alert(err.response.data.message)
         })
     }
 
@@ -173,12 +175,12 @@ export default function CartPage() {
             <Span9>Forma de pagamento</Span9>
             <Span10></Span10>
             <DivRadio>
-                <input type="radio" defaultChecked name="checked" value="dinheiro" onChange={onChangePaymentMethods}/>
+                <input type="radio" defaultChecked name="checked" value="money" onChange={onChangePaymentMethods}/>
                 <label>Dinheiro</label>
             </DivRadio>
             
             <DivRadio>
-                <input type="radio" name="checked" value="cartao" onChange={onChangePaymentMethods}/>
+                <input type="radio" name="checked" value="creditcard" onChange={onChangePaymentMethods}/>
                 <label>Cartao de credito</label>
             </DivRadio>
         </DivPaymentMethods>
