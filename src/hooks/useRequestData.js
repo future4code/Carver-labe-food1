@@ -25,7 +25,7 @@ const useRequestData = (initialData, url) => {
         alert('Ocorreu um erro, tente novamente')
         setters.setIsLoading(false)
       })
-  }, [])
+  }, [url])
 
 
   return (data)
