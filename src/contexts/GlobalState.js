@@ -4,8 +4,16 @@ import { GlobalContext } from "./GlobalStateContext";
 const GlobalState = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
+    const states = {
+      isLoading
+    }
+
+    const setters = {
+      setIsLoading
+    }
+
 return (
-    <GlobalContext.Provider value={{isLoading, setIsLoading}}>
+    <GlobalContext.Provider value={{states, setters}}>
       {props.children}
     </GlobalContext.Provider>
   );

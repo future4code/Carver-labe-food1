@@ -14,7 +14,7 @@ export const OrderHistoryItemContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    border: 1px solid black;
+    border: 1px solid #b8b8b8;
     border-radius: 10px;
     padding: 4.4%;
     h1{
