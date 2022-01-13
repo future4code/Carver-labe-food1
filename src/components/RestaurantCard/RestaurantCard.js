@@ -15,11 +15,11 @@ export default function RestaurantCard(props) {
         />
         <DescriptionContainer>
           <div>
-          <Typography gutterBottom variant="body2" component="p">
+          <Typography color={"primary"} gutterBottom variant="body2" component="p">
             {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {deliveryTime} min
+            {deliveryTime - 10} - {deliveryTime} min
           </Typography>
           </div>
           <ShippingContainer>
