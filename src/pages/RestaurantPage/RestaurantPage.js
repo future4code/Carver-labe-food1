@@ -50,7 +50,7 @@ export default function RestaurantPage() {
     <div key={i}>
      <p>{i}</p>
      {products && (
-      products.i.map((product) => {
+      products.map((product) => {
        return (
          <CardProduct
           key={product.id}
@@ -71,6 +71,7 @@ export default function RestaurantPage() {
  useEffect(() => {
   getRestaurantDetail()
  }, [])
+
  return (
   <BodyContainer>
    <AppBar color="secondary">
