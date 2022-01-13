@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const DivMain = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: 100vh;
     width: 100vw;
 `
@@ -13,25 +14,20 @@ export const DivHeader = styled.div`
     height: 80px;
     align-items: center;
     justify-content: center;
+    align-self: center;
 `
 
 export const DivAdress = styled.div`
-    /* border: 1px solid black;
-    display: flex;
-    width: 368px;
-    height: 76px;
-    margin: 1px 0 16px;
-    padding: 16px;
-    background-color: #b8b8b8;
-    align-items: center;
-    justify-content: flex-start; */
     display: flex;
     flex-direction: column;
-    width: 360px;
-    height: 76px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 90%;
+    height: 80px;
     margin: 1px 0 16px;
     padding: 16px;
     background-color: #eee;
+    align-self: center;
 `
 
 export const Span1 = styled.span`
@@ -73,7 +69,7 @@ export const Span3 = styled.span`
     font-style: normal;
     line-height: normal;
     letter-spacing: -0.39px;
-    color: var(--dark-peach);
+    color: #e86e5a;
 `
 export const Span4 = styled.span`  
     width: 328px;
@@ -142,110 +138,167 @@ export const Span8 = styled.span`
   line-height: normal;
   letter-spacing: -0.43px;
   text-align: right;
-  color: var(--dark-peach);
+  color: #e86e5a;
 `
 
 export const Span9 = styled.span`
-    width: 328px;
-    height: 42px;
-    padding: 12px 16px;
-    border-radius: 2px;
-    background-color: var(--dark-peach);
+    width: 90%;
+    height: 25px;
+`
 
+export const Span10 = styled.span`
+    width: 100%;
+    margin-bottom: 10px;
+    border: solid 1px #000;
 `
 
 export const DivRestaurant = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    height: 120px;
-    align-items: flex-start;
-    
+    height: 110px;
+    align-items: flex-start; 
+    align-self: center; 
+`
+
+export const SpanRest1 = styled.span`
+    border: 1px solid #e86e5a;
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    padding: 0 15px;
+    height: 30px;
+`
+
+export const SpanRest2 = styled.span`
+    width: 166px;
+    height: 18px;
+    margin: 18px 16px 6px 0;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    color: #e86e5a;
+`
+
+export const SpanRest3 = styled.span`
+   width: 198px;
+    height: 30px;
+    margin: 6px 17px 6px 0;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.34px;
+    color: #b8b8b8;
+`
+
+export const SpanRest4 = styled.span`
+    width: 108px;
+    height: 19px;
+    margin: 6px 17px 15px 0;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    color: #000;
+`
+
+export const ButtonRest = styled.button`
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: #e86e5a;
+    justify-content: center;
+    width: 90px;
+    height: 31px;
+    margin: 9px 0 0 17px;
+    padding: 8px 23px 9px 24px;
+    border-radius: 8px;
+    border: solid 1px #e02020;
+    align-self: flex-end;
+    margin-top: 20px;
 `
 
 export const DivItems = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-    justify-content: flex-start;
+    width: 90%;
+    align-items: center;
     margin: 15px 15px;
+    align-self: center;
 `
 export const DivItem = styled.div`
-    border: 1px solid black;
+    border: 1px solid #b8b8b8;
     display: flex;
     flex-direction: row;
     width: 90%;
     height: 200px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 15px 0;
+    margin-top: 15px;
 `
 export const DivImage = styled.div`
     display: flex;
-    width: 300px;
-    height: 125%;
-    align-items: flex-start;
-    justify-content: flex-start;
+    width: 50%;
+    height: 100%;
 `
 export const DivDescription = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding-left: 15px;
     width: 100%;
     height: 100%;
-    
-    span{
-        margin: 7px 0;
-    }
 `
 
 export const DivDelivery = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 180px;
+    width: 90%;
+    height: 50px;
     align-items: center;
-    justify-content: flex-start;
+    align-self: center;
 `
 
 export const DivSubTotal = styled.div`
     display: flex;
-    width: 100%;
-    height: 180px;
+    width: 90%;
     align-items: center;
-    justify-content: space-evenly;
-    
+    justify-content: space-evenly; 
+    align-self: center;   
 `
 
 export const DivPaymentMethods = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 180px;
     align-items: flex-start;
-
-    div{
-        text-align: left
-    }
+    width: 90%;
+    align-self: center;
 `
 export const ImG = styled.img`
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
 `
 
 export const DivButton = styled.div`
     display: flex;
-    width: 328px;
+    width: 90%;
     height: 42px;
-    padding: 12px 16px;
     border-radius: 2px;
-    background-color: var(--dark-peach);
+    background-color: white;
+    align-self: center;
 `
 
 export const Button = styled.button`
-    width: 345px;
+    width: 100%;
     height: 30px;
     font-family: Roboto;
     font-size: 16px;
@@ -256,13 +309,20 @@ export const Button = styled.button`
     letter-spacing: -0.39px;
     text-align: center;
     color: #000;
+    background-color: #e86e5a;
+    border: none;
 `
 
 export const DivScroll = styled.div`
     display: flex;
     flex-direction: column;
-    /* overflow-y: auto;
+    height: 80%;
+    overflow-y: auto;
     ::-webkit-scrollbar{
         display: none;
-    } */
+    }
+`
+
+export const DivRadio = styled.div`
+    display: flex;
 `

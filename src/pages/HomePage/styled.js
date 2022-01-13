@@ -18,11 +18,10 @@ border: none;
 height: 56px;
 font-size: 15px;
 padding-left: 10px;
-
 `
 
 export const InputContainer = styled.div`
-width: 338px;
+width: 328px;
 display: flex;
 border: 1px solid #b8b8b8;
 height: 58px;
@@ -35,13 +34,15 @@ textarea:focus, input:focus {
 `
 
 export const PageTittleContainer = styled.div`
-    width: 100%;
-    height: 49px;
-    top: 0;
     position: fixed;
-    display: flex;
-    border-bottom: solid 1px #b8b8b8;
+    top: 0;
+    width: 100%;
+    height: 56px;
+    box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);
     background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     z-index: 1;
 `
 

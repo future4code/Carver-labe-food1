@@ -7,7 +7,7 @@ export default function RestaurantCard(props) {
  const { name, shipping, deliveryTime, logoUrl, onClickCard } = props
 
   return (
-    <MainContainer>
+    <MainContainer variant="outlined" style={{ borderRadius: 10 }}>
       <RestaurantContainer onClick={onClickCard}>
         <ImageContainer
           image={logoUrl}

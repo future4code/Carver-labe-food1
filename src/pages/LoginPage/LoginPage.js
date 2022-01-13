@@ -1,19 +1,20 @@
 import React from "react"
-import { ScreenContainer, LogoImage, SignUpButtonContainer } from "./styled"
-//import logo from "../../assets/logo.png"
-import Button from '@mui/material/Button';
-import LoginForm from "./LoginForm"
 import { useNavigate } from 'react-router-dom'
+
+import Button from '@mui/material/Button';
+
 import { goToSignUpPage } from "../../routes/coordinator"
-//import useUnprotectedPage from '../../hooks/useUnprotectedPage';
+import LoginForm from "./LoginForm"
+import { ScreenContainer, LogoImage, SignUpButtonContainer } from "./styled"
+import logo from "../../assets/logo.png"
+import useUnprotectedPage from '../../hooks/useUnprotectedPage';
 
 const LoginPage = () => {
-    //useUnprotectedPage()
+    useUnprotectedPage()
     const history = useNavigate()
     return (
         <ScreenContainer>
-            <LogoImage src={''} />
-            <p>Entrar</p>
+            <LogoImage src={logo} alt='logo' />
             <LoginForm />
             <SignUpButtonContainer>
                 <Button

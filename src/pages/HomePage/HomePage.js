@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
 import useProtectedPage from '../../hooks/useProtectedPage'
-// import { GlobalContext } from '../../contexts/GlobalStateContext'
+import { GlobalContext } from '../../contexts/GlobalStateContext'
 import useRequestData from '../../hooks/useRequestData'
 import { BASE_URL } from '../../constants/url'
 import { Input, MainContainer, InputContainer, PageTittleContainer, TittleNavContainer } from "./styled"
@@ -10,6 +10,7 @@ import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { goToRestaurantPage } from "../../routes/coordinator"
 import CategoriesCarrossel from "../../components/CategoriesCarrossel/CategoriesCarrossel"
+import LoadingCard from "../../components/Loading/LoadingCard"
 
 export default function HomePage() {
 
@@ -17,6 +18,7 @@ export default function HomePage() {
     const [searchFor, setSearchFor] = useState('')
     const [restaurants, setRestaurants] = useState([])
     const [categories, setCategories] = useState('')
+    const { states } = useContext(GlobalContext)
     const history = useNavigate()
 
 
@@ -85,10 +87,8 @@ export default function HomePage() {
             <CategoriesCarrossel
                 handleCategory={handleCategory}
             />
-            {/* {isLoading && <p>Carregando</p>} */}
-            {/* {!isLoading && restaurantsList && restaurantsList.leght > 0 && restaurantsList} */}
             {/* {!isLoading && restaurantsList && restaurantsList.legth === 0 && (<h4>"Nenhum restaurante encontrado</h4>)} */}
-            {restaurantsList.length > 0 ? restaurantsList : <h4>"Nenhum restaurante encontrado"</h4>}
+            {restaurantsList.length > 0 ? restaurantsList : <LoadingCard/>}
         </MainContainer >
     )
 }

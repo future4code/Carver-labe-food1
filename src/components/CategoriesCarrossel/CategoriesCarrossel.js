@@ -20,15 +20,15 @@ export default function CategoriesCarrossel(props) {
                 value={value}
                 scrollButtons={false}
             >
-                <Tab onClick={() => handleCategory("Árabe")} label="Árabe" />
-                <Tab onClick={() => handleCategory("Asiática")} label="Asiática" />
-                <Tab onClick={() => handleCategory("Hamburguer")} label="Hamburguer" />    
-                <Tab onClick={() => handleCategory("Italiana")} label="Italiana" />
-                <Tab onClick={() => handleCategory("Sorvetes")} label="Sorvetes" />
-                <Tab onClick={() => handleCategory("Carnes")} label="Carnes" />
-                <Tab onClick={() => handleCategory("Baiana")} label="Baiana" />
-                <Tab onClick={() => handleCategory("Petiscos")} label="Petiscos" />
-                <Tab onClick={() => handleCategory("Mexicana")} label="Mexicana" />
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Árabe")} label="Árabe" />
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Asiática")} label="Asiática" />
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Hamburguer")} label="Hamburguer" />    
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Italiana")} label="Italiana" />
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Sorvetes")} label="Sorvetes" />
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Carnes")} label="Carnes" />
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Baiana")} label="Baiana" />
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Petiscos")} label="Petiscos" />
+                <Tab style={{ textTransform: 'none' }} onClick={() => handleCategory("Mexicana")} label="Mexicana" />
             </Tabs>
         </CategoriesContainer>
     );
