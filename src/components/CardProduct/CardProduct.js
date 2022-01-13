@@ -20,9 +20,9 @@ export default function CardProduct({ product, functionButton }) {
     <CardContent sx={{ flex: '1 0 auto' }}>
      <Typography>{product.name}</Typography>
      <Typography>{product.description}</Typography>
-     <Typography>{`R$${product.price.toFixed(2)}`}</Typography>
+     <Typography>{`${product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</Typography>
     </CardContent>
-    <Button onClick={()=>functionButton(product)}>Adicionar</Button>
+    <Button onClick={() => functionButton(product)}>Adicionar</Button>
    </Box>
   </Card>
  )
