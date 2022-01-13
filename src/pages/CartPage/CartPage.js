@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios'
+import { GlobalContext } from "../../contexts/GlobalStateContext"
 import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10} from "./styled";
 
 export default function CartPage() {
 
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IklzTFl5UjlMNW5zemNHRGQ4bmlKIiwibmFtZSI6IkFuZHLDqSBNYXJxdWVzIiwiZW1haWwiOiJhbmRyZW1hcnF1ZXNAZ21haWwuY29tIiwiY3BmIjoiMjIyLDIyMiwyMjItMjIiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUnVhIEpvYXF1aW0gRmVybmFuZGVzLCAyMTEsIDcxIC0gVmlsYSBOb2d1ZWlyYSIsImlhdCI6MTY0MTg1NDQ0M30.NGAp6nbdH24nsPQ9lQxUSd_zOpeQwB2sbbRHrkJ-EJs"
     const aaa = "rappi4A"
-    const [restaurant, setRestaurant] = useState([])
     const [restaurantData, setRestaurantData] = useState("")
     const [address, setAddress] = useState()
-    const [id, setId] = useState()
     const [paymentMethod, setPaymentMethod] = useState()
+    const [products, setProducts] = useState([{}])
+    const [id, setId] = useState()
+    const [quantity, setQuantity] = useState()
+    const { states, setters, requests } = useContext(GlobalContext);
 
     let total = 0
+
     useEffect(() => {
         getRestaurant()
         getAddress()
     }, [])
+
+    const newCart = localStorage.getItem("cart")
+    const cart = JSON.parse(newCart)
+    console.log(cart)
 
     const getRestaurant = () => {
 
@@ -26,7 +34,7 @@ export default function CartPage() {
             }
         })
         .then((res) => {
-            setRestaurant(res.data.restaurant.products)
+            // setRestaurant(res.data.restaurant.products)
             setRestaurantData(res.data.restaurant)
         })
         .catch((err) => {
@@ -50,20 +58,32 @@ export default function CartPage() {
         })
     }
 
-    // const placeOrder = () => {
+    const product = cart.forEach((item) => {
+            return (item.id, item.quantity)
+        })
+    
+    console.log(product)
 
-    //     axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/${id}/order`, {
-    //         headers: {
-    //             auth: token
-    //         }
-    //     })
-    //     .then((res) => {
-    //         console.log(res.data)
-    //     })
-    //     .catch((err) => {
-    //         console.log(err.response.data)
-    //     })
-    // }
+    const placeOrder = () => {
+
+        console.log(products)
+        const body = {
+            
+            paymentMethod: paymentMethod
+        }
+
+        axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/1/order`, {
+            headers: {
+                auth: token
+            }
+        , body})
+        .then((res) => {
+            console.log(res.data)
+        })
+        .catch((err) => {
+            console.log(err.response.data)
+        })
+    }
 
     // const getActiveOrder = () => {
 
@@ -81,11 +101,11 @@ export default function CartPage() {
     //     })
     // }
 
-    restaurant.forEach((rest) => {
-        total = total + rest.price
+    cart.forEach((rest) => {
+        total += rest.quantity  * rest.price
     })
     
-    const renderRestaurant = restaurant.map((rest) => {
+    const renderRestaurant = cart.map((rest) => {
 
         return(
             
@@ -99,7 +119,7 @@ export default function CartPage() {
                     <SpanRest1>2</SpanRest1>
                     <SpanRest2>{rest.name}</SpanRest2>
                     <SpanRest3>{rest.description}</SpanRest3>
-                    <SpanRest4>R${rest.price.toFixed(2)}</SpanRest4>
+                    <SpanRest4>{Number(rest.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</SpanRest4>
                 
                 
                     <ButtonRest>Remover</ButtonRest>
@@ -111,6 +131,10 @@ export default function CartPage() {
 
     const onChangePaymentMethods = (e) => {
         setPaymentMethod(e.target.value)
+    }
+
+    const deleteItemCart = () => {
+
     }
 
  return(
@@ -136,12 +160,12 @@ export default function CartPage() {
         </DivItems>
 
         <DivDelivery>
-            <Span6>Frete R${restaurantData.shipping}</Span6>
+            <Span6>Frete {Number(restaurantData.shipping).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</Span6>
         </DivDelivery>
 
         <DivSubTotal>
             <Span7>SUBTOTAL</Span7>
-            <Span8>RS{total.toFixed(2)}</Span8>
+            <Span8>{Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</Span8>
         </DivSubTotal>
 
         <DivPaymentMethods>
@@ -159,7 +183,7 @@ export default function CartPage() {
         </DivPaymentMethods>
 
         <DivButton>
-            <Button>Confirmar</Button>
+            <Button onClick={placeOrder}>Confirmar</Button>
         </DivButton>
       </DivScroll>
   </DivMain>

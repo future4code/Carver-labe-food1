@@ -9,12 +9,21 @@ export const DivMain = styled.div`
 `
 
 export const DivHeader = styled.div`
-    display: flex;
+    /* display: flex;
     width: 100%;
     height: 80px;
     align-items: center;
     justify-content: center;
-    align-self: center;
+    align-self: center; */
+    /* position: fixed;
+    top: 0; */
+    width: 100%;
+    height: 64px;
+    box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 `
 
 export const DivAdress = styled.div`
@@ -316,7 +325,7 @@ export const Button = styled.button`
 export const DivScroll = styled.div`
     display: flex;
     flex-direction: column;
-    height: 80%;
+    padding-bottom: 60px;
     overflow-y: auto;
     ::-webkit-scrollbar{
         display: none;

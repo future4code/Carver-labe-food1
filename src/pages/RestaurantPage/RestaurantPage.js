@@ -41,7 +41,7 @@ export default function RestaurantPage() {
   let newProduct
   let newArray
   const index = states.cart.findIndex((item) => item.id === product.id)
-  if (index != -1) {
+  if (index !== -1) {
    quant = states.cart[index].quantity + 1
    newProduct = { ...states.cart[index], quantity: quant }
    newArray = [...states.cart, newProduct]
@@ -52,8 +52,9 @@ export default function RestaurantPage() {
    newArray = [...states.cart, newProduct]
    setters.setCart(newArray)
   }
+  localStorage.setItem("cart", JSON.stringify(states.cart))
  }
- 
+ console.log(states.cart)
  useEffect(() => {
   getRestaurantDetail("1", setRestaurant, setProducts, getCategorys, token)
  }, [])
