@@ -5,10 +5,10 @@ import Button from '@mui/material/Button';
 import LoginForm from "./LoginForm"
 import { useNavigate } from 'react-router-dom'
 import { goToSignUpPage } from "../../routes/coordinator"
-import useUnprotectedPage from '../../hooks/useUnprotectedPage';
+//import useUnprotectedPage from '../../hooks/useUnprotectedPage';
 
 const LoginPage = () => {
-    useUnprotectedPage()
+    //useUnprotectedPage()
     const history = useNavigate()
     return (
         <ScreenContainer>
