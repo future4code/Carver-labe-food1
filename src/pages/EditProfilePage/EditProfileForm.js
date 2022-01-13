@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-import CircularProgress from '@material-ui/core/CircularProgress'
-import { Box, IconButton, Typography } from '@mui/material'
-import Button from '@material-ui/core/Button'
-import { Toolbar } from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Box, IconButton, Typography } from '@mui/material';
+import Button from '@material-ui/core/Button';
+import { Toolbar } from '@material-ui/core';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { validateCPF } from 'validations-br'
+import { validateCPF } from 'validations-br';
 
-import { updateProfile } from "../../services/user"
-import InputRHF from '../../components/RHF/InputRHF'
-import InputMaskRHF from '../../components/RHF/InputMaskRHF'
+import { updateProfile } from "../../services/user";
+import InputRHF from '../../components/RHF/InputRHF';
+import InputMaskRHF from '../../components/RHF/InputMaskRHF';
 
 const mode = 'onSubmit';
 
@@ -21,7 +21,7 @@ const defaultValues = {
     name: '',
     email: '',
     cpf: '',
-}
+};
 
 const schema = {
     mode,
@@ -34,7 +34,7 @@ const schema = {
                 .test('cpf', 'CPF inválido.', value => value && value.replace(/[^0-9]/g, '').length === 11 ? validateCPF(value) : true),
         }).required()
     )
-}
+};
 
 const EditProfileForm = () => {
     const history = useNavigate()
@@ -44,7 +44,7 @@ const EditProfileForm = () => {
     const { control, handleSubmit } = form;
 
     const onSubmit = () => {
-        updateProfile(form.getValues(), form.reset(), history, setIsLoading);
+        updateProfile(form.getValues(), history, setIsLoading);
     }
 
     return (
@@ -106,7 +106,7 @@ const EditProfileForm = () => {
                 </Button>
             </Box>
         </>
-    )
-}
+    );
+};
 
 export default EditProfileForm;

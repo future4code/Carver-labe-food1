@@ -1,44 +1,44 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button'
-import { IconButton, Toolbar } from '@material-ui/core'
+import Button from '@material-ui/core/Button';
+import { IconButton, Toolbar } from '@material-ui/core';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import CircularProgress from '@material-ui/core/CircularProgress'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Box, Typography } from '@mui/material';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import InputRHF from '../../components/RHF/InputRHF'
+import InputRHF from '../../components/RHF/InputRHF';
+import { signAddress } from '../../services/user';
 
-import { signAddress } from '../../services/user'
-import { Box, Typography } from '@mui/material'
 
 const mode = 'onSubmit';
 
 const defaultValues = {
-    logradouro: '',
+    street: '',
     number: '',
-    complemento: '',
-    bairro: '',
-    cidade: '',
-    estado: ''
-}
+    complement: '',
+    neighbourhood: '',
+    city: '',
+    state: ''
+};
 
 const schema = {
     mode,
     defaultValues,
     resolver: yupResolver(
         yup.object().shape({
-            logradouro: yup.string().required('Campo Obrigatório'),
+            street: yup.string().required('Campo Obrigatório'),
             number: yup.string().required('Campo Obrigatório'),
-            complemento: yup.string(),
-            bairro: yup.string().required('Campo Obrigatório'),
-            cidade: yup.string().required('Campo Obrigatório'),
-            estado: yup.string().required('Campo Obrigatório')
+            complement: yup.string(),
+            neighbourhood: yup.string().required('Campo Obrigatório'),
+            city: yup.string().required('Campo Obrigatório'),
+            state: yup.string().required('Campo Obrigatório')
         }).required()
     )
-}
+};
 
 const EditAddressForm = () => {
     const history = useNavigate()
@@ -47,7 +47,7 @@ const EditAddressForm = () => {
     const { control, handleSubmit } = form;
 
     const onSubmit = () => {
-        signAddress(form.getValues, form.reset(), history, setIsLoading)
+        signAddress(form.getValues(), history, setIsLoading)
     }
     return (
         <>
@@ -79,7 +79,7 @@ const EditAddressForm = () => {
             >
 
                 <InputRHF
-                    name="logradouro"
+                    name="street"
                     label={"logradouro"}
                     control={control}
 
@@ -91,25 +91,25 @@ const EditAddressForm = () => {
                 />
 
                 <InputRHF
-                    name='complemento'
+                    name='complement'
                     label={'Complemento'}
                     control={control}
 
                 />
                 <InputRHF
-                    name='bairro'
+                    name='neighbourhood'
                     label={'Bairro'}
                     control={control}
 
                 />
                 <InputRHF
-                    name='cidade'
+                    name='city'
                     label={'Cidade'}
                     control={control}
 
                 />
                 <InputRHF
-                    name='estado'
+                    name='state'
                     label={'Estado'}
                     control={control}
 
@@ -125,7 +125,7 @@ const EditAddressForm = () => {
             </Box>
         </>
 
-    )
-}
+    );
+};
 
 export default EditAddressForm;

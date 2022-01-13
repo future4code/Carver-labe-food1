@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const ScreenContainer = styled.div`
   display: flex;
@@ -6,26 +6,6 @@ export const ScreenContainer = styled.div`
   align-items: center;
   width: 100vw;
 `
-
-export const InputsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80vw;
-  max-width: 450px;
-  align-items: center;
-  gap: 18px;
-  margin-bottom: 24px;
-`
-
-export const SignUpFormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80vw;
-  max-width: 450px;
-  align-items: center;
-  margin-bottom: 20px;
-`
-
 export const LogoImage = styled.img`
   width: 150px;
   height: 68px;

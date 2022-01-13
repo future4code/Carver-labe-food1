@@ -7,6 +7,7 @@ export const ProductsContainer = styled.div`
 display: flex;
 flex-direction: column ;
 align-items:center;
+padding-bottom:60px;
 `
 export const DetailContainer = styled.div`
 padding-top:7vh;
