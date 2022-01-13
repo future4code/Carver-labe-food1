@@ -30,12 +30,12 @@ const schema = {
     defaultValues,
     resolver: yupResolver(
         yup.object().shape({
-            logradouro: yup.string().required('Campo Obrigatório'),
+            street: yup.string().required('Campo Obrigatório'),
             number: yup.string().required('Campo Obrigatório'),
-            complemento: yup.string(),
-            bairro: yup.string().required('Campo Obrigatório'),
-            cidade: yup.string().required('Campo Obrigatório'),
-            estado: yup.string().required('Campo Obrigatório')
+            neighbourhood: yup.string().required('Campo Obrigatório'),
+            city: yup.string().required('Campo Obrigatório'),
+            state: yup.string().required('Campo Obrigatório'),
+            complement: yup.string()
         }).required()
     )
 }
@@ -47,7 +47,7 @@ const SignAddressForm = () => {
     const { control, handleSubmit } = form;
 
     const onSubmit = () => {
-        signAddress(form.getValues, form.reset(), history, setIsLoading)
+        signAddress(form.getValues(), history, setIsLoading)
     }
     return (
         <>
@@ -83,8 +83,8 @@ const SignAddressForm = () => {
                 </Typography>
 
                 <InputRHF
-                    name="logradouro"
-                    label={"logradouro"}
+                    name="street"
+                    label={"Logradouro"}
                     control={control}
 
                 />
@@ -95,25 +95,26 @@ const SignAddressForm = () => {
                 />
 
                 <InputRHF
-                    name='complemento'
+                    name='complement'
                     label={'Complemento'}
                     control={control}
+                    required={false}
 
                 />
                 <InputRHF
-                    name='bairro'
+                    name='neighbourhood'
                     label={'Bairro'}
                     control={control}
 
                 />
                 <InputRHF
-                    name='cidade'
+                    name='city'
                     label={'Cidade'}
                     control={control}
 
                 />
                 <InputRHF
-                    name='estado'
+                    name='state'
                     label={'Estado'}
                     control={control}
 

@@ -1,11 +1,12 @@
-import React from 'react'
-import { IconButton, Toolbar } from '@material-ui/core'
+import React from 'react';
+import { IconButton, Toolbar } from '@material-ui/core';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import logo from '../../assets/logo.png'
-import { ScreenContainer } from './styled'
-import SignUpForm from './SignUpForm'
-import { LogoImage } from './styled'
-import useUnprotectedPage from '../../hooks/useUnprotectedPage'
+
+import logo from '../../assets/logo.png';
+import { ScreenContainer } from './styled';
+import SignUpForm from './SignUpForm';
+import { LogoImage } from './styled';
+import useUnprotectedPage from '../../hooks/useUnprotectedPage';
 
 const SignUpPage = () => {
     useUnprotectedPage()
@@ -26,7 +27,7 @@ const SignUpPage = () => {
             <LogoImage src={logo} alt='logo' />
             <SignUpForm />
         </ScreenContainer>
-    )
-}
+    );
+};
 
-export default SignUpPage
+export default SignUpPage;
