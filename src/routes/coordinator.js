@@ -4,7 +4,7 @@ export function goToLogin(history) {
 export function goToSignUpPage(history) {
  history('/perfil/cadastro')
 }
-export function goToSignAdressPage(history) {
+export function goToSignAddressPage(history) {
  history('/endereco/cadastro')
 }
 export function goToHomePage(history) {
@@ -22,6 +22,6 @@ export function goToProfilePage(history) {
 export function goToEditProfilePage(history) {
  history('/perfil/editar')
 }
-export function goToEditAdressPage(history) {
+export function goToEditAddressPage(history) {
  history('/endereco/editar')
 }

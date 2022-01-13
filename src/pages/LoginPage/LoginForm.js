@@ -8,9 +8,9 @@ import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { login } from "../../services/user"
-import { InputsContainer, LoginFormContainer } from "./styled"
 import InputRHF from "../../components/RHF/InputRHF";
 import InputPasswordRHF from "../../components/RHF/InputPasswordRHF";
+import { Box, Typography } from "@mui/material";
 
 const mode = 'onSubmit';
 
@@ -40,31 +40,52 @@ const LoginForm = () => {
     }
 
     return (
-        <LoginFormContainer>
-            <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-                <InputsContainer>
-                    <InputRHF
-                        name='email'
-                        label={'E-mail'}
-                        control={control}
-                    />
-                                       <InputPasswordRHF
-                        name='password'
-                        label={'Senha'}
-                        control={control}
-                    />
 
-                </InputsContainer>
-                <Button
-                    type={"submit"}
-                    fullWidth
-                    variant={"contained"}
-                    color={"primary"}
-                >
-                    {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Fazer Login</>}
-                </Button>
-            </form>
-        </LoginFormContainer>
+        <Box
+            onSubmit={handleSubmit(onSubmit)}
+            autoComplete='off'
+            component='form'
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '84%',
+                gap: '16px',
+                pb: '28px'
+            }}
+        >
+            <Typography
+                variant="h6"
+                textAlign={'center'}
+            >
+                Entrar
+            </Typography>
+
+            <InputRHF
+                name='email'
+                label={'E-mail'}
+                control={control}
+                placeholder={'email@email.com'}
+            />
+            <InputPasswordRHF
+                name='password'
+                label={'Senha'}
+                control={control}
+                placeholder={'Mínimo 6 caracteres'}
+
+            />
+
+            <Button
+                type={"submit"}
+                variant={"contained"}
+                color={"primary"}
+            >
+                {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Fazer Login</>}
+            </Button>
+
+        </Box>
+
+
+
     )
 }
 
