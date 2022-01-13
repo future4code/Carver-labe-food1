@@ -26,6 +26,12 @@ export default function CartPage() {
     const cart = JSON.parse(newCart)
     console.log(cart)
 
+    // cart.forEach((item) => {
+    //     const prod = [...products, {id: item.id, quantity: item.quantity}]
+    //     setProducts(prod)
+    // })
+    // console.log(products)
+
     const getRestaurant = () => {
 
         axios.get(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/1`, {
@@ -58,25 +64,20 @@ export default function CartPage() {
         })
     }
 
-    const product = cart.forEach((item) => {
-            return (item.id, item.quantity)
-        })
-    
-    console.log(product)
-
     const placeOrder = () => {
 
-        console.log(products)
-        const body = {
+        // const body = {{
             
-            paymentMethod: paymentMethod
-        }
+        // }
+            
+        //     paymentMethod: paymentMethod
+        // }
 
         axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/1/order`, {
             headers: {
                 auth: token
             }
-        , body})
+        })
         .then((res) => {
             console.log(res.data)
         })
@@ -105,21 +106,21 @@ export default function CartPage() {
         total += rest.quantity  * rest.price
     })
     
-    const renderRestaurant = cart.map((rest) => {
+    const renderItem = cart.map((item) => {
 
         return(
             
-        <DivItem key={rest.id}>
+        <DivItem key={item.id}>
             <DivImage>
-                <ImG src={rest.photoUrl} alt="rest.name"/>
+                <ImG src={item.photoUrl} alt="item.name"/>
             </DivImage>
             <DivDescription>
                 
                 
-                    <SpanRest1>2</SpanRest1>
-                    <SpanRest2>{rest.name}</SpanRest2>
-                    <SpanRest3>{rest.description}</SpanRest3>
-                    <SpanRest4>{Number(rest.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</SpanRest4>
+                    <SpanRest1>{item.quantity}</SpanRest1>
+                    <SpanRest2>{item.name}</SpanRest2>
+                    <SpanRest3>{item.description}</SpanRest3>
+                    <SpanRest4>{Number(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</SpanRest4>
                 
                 
                     <ButtonRest>Remover</ButtonRest>
@@ -156,7 +157,7 @@ export default function CartPage() {
         </DivRestaurant>
 
         <DivItems>
-            {renderRestaurant}
+            {renderItem}
         </DivItems>
 
         <DivDelivery>
