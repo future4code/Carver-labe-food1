@@ -6,14 +6,12 @@ import CardContent from '@mui/material/CardContent';
 
 export const ImageContainer = styled(CardMedia)`
     width: 100%;
-    height: 135px;
-    margin: 0 0 12px;
+    height: 140px;
     object-fit: contain;
 `
 export const RestaurantContainer = styled(CardActionArea)`
     width: 338px;
     height: 198px;
-    padding: 0 0 16px;
     border-radius: 8px;
     border: solid 1px #b8b8b8;
 `
