@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { 
     ProfileMainContainer, 
     ProfileHeaderContainer, 
@@ -10,24 +10,19 @@ import {
     ProfileAddressIconContainer,
     ProfileOrderHistoryContainer
     } from './styled'
-import { BASE_URL } from '../../constants/url'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import OrderHistoryItem from "../../components/OrderHistoryItem/OrderHistoryItem"
 import { GlobalContext } from "../../contexts/GlobalStateContext"
-import useRequestData from "../../hooks/useRequestData"
 import LoadingText from '../../components/Loading/LoadingText'
+import {goToEditProfilePage, goToEditAddressPage} from '../../routes/coordinator'
+import { useNavigate } from "react-router-dom";
+import { useGetProfileInfo } from '../../hooks/useGetProfileInfo'
 
 export default function ProfilePage() {
-
+    const history = useNavigate()
     const { states } = useContext(GlobalContext)
-    const [ profile, setProfile ] = useState({})
-    const url = `${BASE_URL}profile`
 
-    const data = useRequestData({}, url)
-
-    useEffect(() => {
-        setProfile(data.user)
-    }, [])
+    useGetProfileInfo()
 
     return (
         <ProfileMainContainer>
@@ -38,19 +33,19 @@ export default function ProfilePage() {
             </ProfileHeaderContainer>
             <ProfileInfoContainer>
                 <ProfileInfoAndIconContainer>
-                    <p>{states.isLoading ? <LoadingText /> : profile && profile.name}</p>
-                    <EditOutlinedIcon />
+                    <p>{states.isLoading ? <LoadingText /> : states.profile && states.profile.name}</p>
+                    <EditOutlinedIcon onClick={() => {goToEditProfilePage(history)}}/>
                 </ProfileInfoAndIconContainer>
-                <p>{states.isLoading ? <LoadingText /> : profile && profile.email}</p>
-                <p>{states.isLoading ? <LoadingText /> : profile && profile.cpf}</p>
+                <p>{states.isLoading ? <LoadingText /> : states.profile && states.profile.email}</p>
+                <p>{states.isLoading ? <LoadingText /> : states.profile && states.profile.cpf}</p>
             </ProfileInfoContainer>
             <ProfileAddressContainer>
                 <ProfileAddressTextContainer>
                     <h3>Endereço Cadastrado</h3>
-                    <p>{states.isLoading ? <LoadingText /> : profile && profile.address}</p>
+                    <p>{states.isLoading ? <LoadingText /> : states.profile && states.profile.address}</p>
                 </ProfileAddressTextContainer>
                 <ProfileAddressIconContainer>
-                    <EditOutlinedIcon />
+                    <EditOutlinedIcon onClick={() => {goToEditAddressPage(history)}}/>
                 </ProfileAddressIconContainer>
             </ProfileAddressContainer>
             <ProfileOrderHistoryContainer>
