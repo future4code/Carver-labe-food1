@@ -13,9 +13,12 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Footer from "../components/Footer/Footer";
 
 export default function Router() {
+
+    const pathname = window.location.pathname
+
     return (
         <BrowserRouter>
-            <Footer />
+            {pathname !== '/login' && pathname !== '/perfil/cadastro' && pathname !== '/endereco/cadastro' && <Footer />}
             <Routes>
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/perfil/cadastro' element={<SignUpPage />} />

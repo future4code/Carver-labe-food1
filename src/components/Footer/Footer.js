@@ -14,13 +14,13 @@ export default function Footer() {
     return (
         <FooterMainContainer>
             <FooterNavContainer>
-                <img src={pathname === '/' ? activeHomepage : unactiveHomepage } alt='Home Icon' />
+                <img src={pathname === '/' || pathname === '/restaurante/:id' ? activeHomepage : unactiveHomepage } alt='Home Icon' />
             </FooterNavContainer>   
             <FooterNavContainer>
                 <img src={pathname === '/carrinho' ? activeCart : unactiveCart } alt='Cart Icon' />
             </FooterNavContainer>  
             <FooterNavContainer>
-                <img src={pathname === '/perfil' ? activeAvatar : unactiveAvatar } alt='Avatar Icon' />
+                <img src={pathname === '/perfil' || pathname === '/perfil/editar' || pathname === '/endereco/editar' ? activeAvatar : unactiveAvatar } alt='Avatar Icon' />
             </FooterNavContainer>  
         </FooterMainContainer>
     )
