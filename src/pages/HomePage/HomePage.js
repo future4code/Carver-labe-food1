@@ -22,12 +22,10 @@ export default function HomePage() {
     const [activeOrder, setActiveOrder] = useState({})
     const { states, setters } = useContext(GlobalContext)
     const history = useNavigate()
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ink5bDhrV25rUVdzNk1SWk5DbzZHIiwibmFtZSI6IkthcmVuIiwiZW1haWwiOiJrYUBsYWJlbnUuY29tIiwiY3BmIjoiMjI5LjIyOS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQWZvbnNvIEJyYXosIDMyMCwgNzcgLSBWaWxhIE4uIENvbmNlacOnw6NvIiwiaWF0IjoxNjQyMTI1MTY0fQ.dNP0n_dhdva69harAH8iPiPHfd4Ji_CzwNTOJzXnjoY"
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZsSW5tZFBVVk5nRUdndWxkd3JZIiwibmFtZSI6IkthcmVuIiwiZW1haWwiOiJrYXJlbkBmdXR1cmU0LmNvbSIsImNwZiI6IjIyOS4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTY0MjEyNjA0OH0.p5IT0TmOH5M-HmcVrh-1Nzus402Yf7bOPCxpE7LxQcY"
 
     useEffect(() => {
-        getRestaurants(token, setRestaurants)
-        getActiveOrder(token, setActiveOrder)
+        getRestaurants(setRestaurants)
+        getActiveOrder(setActiveOrder)
     }, [])
 
     const onClickCard = (id) => {
