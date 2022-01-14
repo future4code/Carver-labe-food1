@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalStateContext"
 import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10} from "./styled";
+
 import { goToHomePage } from "../../routes/coordinator";
 import {BASE_URL} from '../../constants/url'
 
@@ -74,12 +75,10 @@ export default function CartPage() {
         .then((res) => {
             alert("Pedido efetuado com sucesso!")
             goToHomePage(navigate)
-            setCart("")
         })
         .catch((err) => {
             alert(err.response.data.message)
             goToHomePage(navigate)
-            setCart("")
         })
     }
 
