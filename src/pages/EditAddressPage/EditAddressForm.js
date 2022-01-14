@@ -49,6 +49,7 @@ const EditAddressForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const form = useForm(schema);
     const { control, handleSubmit } = form;
+    const token = localStorage.getItem('token')
 
 
     const onSubmit = () => {
@@ -59,7 +60,7 @@ const EditAddressForm = () => {
         setIsLoading(true)
         axios.get(`${BASE_URL}profile/address`, {
             headers: {
-                auth: localStorage.getItem('token')
+                auth: token
             }
         })
             .then((res) => {
