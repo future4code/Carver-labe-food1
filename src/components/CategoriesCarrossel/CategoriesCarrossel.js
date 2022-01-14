@@ -20,8 +20,10 @@ export default function CategoriesCarrossel(props) {
                 onChange={handleChange}
                 value={value}
                 scrollButtons={false}
+                variant={"scrollable"}
+                indicatorColor={"transparent"}
             >
-                <Tab style={{ textTransform: 'none', fontSize: 16 }} label="Todos" />
+                <Tab style={{ textTransform: 'none', fontSize: 16 }} onClick={() => handleCategory("")}label="Todos" />
                 <Tab style={{ textTransform: 'none', fontSize: 16 }} onClick={() => handleCategory("Árabe")} label="Árabe" />
                 <Tab style={{ textTransform: 'none', fontSize: 16 }} onClick={() => handleCategory("Asiática")} label="Asiática" />
                 <Tab style={{ textTransform: 'none', fontSize: 16 }} onClick={() => handleCategory("Hamburguer")} label="Hamburguer" />    
