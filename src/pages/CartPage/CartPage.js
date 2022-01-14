@@ -10,7 +10,7 @@ export default function CartPage() {
     const [restaurantData, setRestaurantData] = useState("")
     const [address, setAddress] = useState()
     const [id, setId] = useState()
-    const [paymentMethod, setPaymentMethod] = useState()
+    const [paymentMethod, setPaymentMethod] = useState("money")
 
     let total = 0
     useEffect(() => {
@@ -148,12 +148,12 @@ export default function CartPage() {
             <Span9>Forma de pagamento</Span9>
             <Span10></Span10>
             <DivRadio>
-                <input type="radio" defaultChecked name="checked" value="dinheiro" onChange={onChangePaymentMethods}/>
+                <input type="radio" defaultChecked name="checked" value="money" onChange={onChangePaymentMethods}/>
                 <label>Dinheiro</label>
             </DivRadio>
             
             <DivRadio>
-                <input type="radio" name="checked" value="cartao" onChange={onChangePaymentMethods}/>
+                <input type="radio" name="checked" value="creditcard" onChange={onChangePaymentMethods}/>
                 <label>Cartao de credito</label>
             </DivRadio>
         </DivPaymentMethods>
