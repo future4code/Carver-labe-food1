@@ -14,6 +14,7 @@ export default function CartPage() {
     const [restaurantData, setRestaurantData] = useState("")
     const [qtd, setQnd] = useState(0)
     const [address, setAddress] = useState()
+
     const [paymentMethod, setPaymentMethod] = useState("money")
     let order = {
         products: [],
