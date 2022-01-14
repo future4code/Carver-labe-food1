@@ -7,9 +7,12 @@ import { ScreenContainer } from './styled';
 import SignUpForm from './SignUpForm';
 import { Img } from './styled';
 import useUnprotectedPage from '../../hooks/useUnprotectedPage';
+import { useNavigate } from 'react-router-dom';
+import { goToLogin } from '../../routes/coordinator';
 
 const SignUpPage = () => {
     useUnprotectedPage()
+    const history = useNavigate()
     return (
 
         <ScreenContainer>
@@ -20,6 +23,7 @@ const SignUpPage = () => {
                     color="inherit"
                     aria-label="menu"
                     sx={{ mr: 15 }}
+                    onClick={() => goToLogin(history)}
                 >
                     <ArrowBackIosIcon />
                 </IconButton>
