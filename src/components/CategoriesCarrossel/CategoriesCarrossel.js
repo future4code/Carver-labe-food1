@@ -3,11 +3,12 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { CategoriesContainer } from './styled';
 
+
 export default function CategoriesCarrossel(props) {
 
     const [value, setValue] = React.useState(0);
-    const { handleCategory } = props
-
+    const { handleCategory} = props
+    
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
@@ -20,6 +21,7 @@ export default function CategoriesCarrossel(props) {
                 value={value}
                 scrollButtons={false}
             >
+                <Tab style={{ textTransform: 'none', fontSize: 16 }} label="Todos" />
                 <Tab style={{ textTransform: 'none', fontSize: 16 }} onClick={() => handleCategory("Árabe")} label="Árabe" />
                 <Tab style={{ textTransform: 'none', fontSize: 16 }} onClick={() => handleCategory("Asiática")} label="Asiática" />
                 <Tab style={{ textTransform: 'none', fontSize: 16 }} onClick={() => handleCategory("Hamburguer")} label="Hamburguer" />    

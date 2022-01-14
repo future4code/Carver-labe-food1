@@ -9,13 +9,15 @@ height: 108px;
 position: fixed;
 padding:24px;
 bottom: 49px;
+font-size: 16px;
 `
 export const OrderContainer = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
+align-items: center;
 `
 export const ClockContainer = styled.div`
 width: 70px;
 padding-left: 16px;
+`
+export const OrderInProgress = styled.p`
+color: white;
 `

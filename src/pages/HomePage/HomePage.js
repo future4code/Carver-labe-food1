@@ -3,10 +3,9 @@ import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
 import useProtectedPage from '../../hooks/useProtectedPage'
 import { GlobalContext } from '../../contexts/GlobalStateContext'
 import {getRestaurants} from '../../services/restaurants'
-import { BASE_URL } from '../../constants/url'
+import {getActiveOrder} from '../../services/order'
 import { Input, MainContainer, InputContainer, PageTittleContainer, TittleNavContainer } from "./styled"
 import SearchIcon from "../../assets/search.svg"
-import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { goToRestaurantPage } from "../../routes/coordinator"
 import CategoriesCarrossel from "../../components/CategoriesCarrossel/CategoriesCarrossel"
@@ -20,34 +19,16 @@ export default function HomePage() {
     const [searchFor, setSearchFor] = useState('')
     const [restaurants, setRestaurants] = useState([])
     const [categories, setCategories] = useState('')
-    const [activeOrder, setActiveOrder] = useState([])
+    const [activeOrder, setActiveOrder] = useState({})
     const { states, setters } = useContext(GlobalContext)
     const history = useNavigate()
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkEwMDVtSEJmeVNrdDdPTjBITGFwIiwibmFtZSI6IkFzdHJvZGV2IiwiZW1haWwiOiJhc3Ryb2RldkBmdXR1cmU0LmNvbSIsImNwZiI6IjMzMy44ODguNjY2LTQ0IiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlJ1YSBQcmF0ZXMsIDYxMyAtIEJvbSBSZXRpcm8iLCJpYXQiOjE2NDE4NTg2NjR9.h2sLzEO7-RUZNiVvQ0KKVbVszyoAVkif0-wONTehV94"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ink5bDhrV25rUVdzNk1SWk5DbzZHIiwibmFtZSI6IkthcmVuIiwiZW1haWwiOiJrYUBsYWJlbnUuY29tIiwiY3BmIjoiMjI5LjIyOS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQWZvbnNvIEJyYXosIDMyMCwgNzcgLSBWaWxhIE4uIENvbmNlacOnw6NvIiwiaWF0IjoxNjQyMTI1MTY0fQ.dNP0n_dhdva69harAH8iPiPHfd4Ji_CzwNTOJzXnjoY"
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZsSW5tZFBVVk5nRUdndWxkd3JZIiwibmFtZSI6IkthcmVuIiwiZW1haWwiOiJrYXJlbkBmdXR1cmU0LmNvbSIsImNwZiI6IjIyOS4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTY0MjEyNjA0OH0.p5IT0TmOH5M-HmcVrh-1Nzus402Yf7bOPCxpE7LxQcY"
 
     useEffect(() => {
         getRestaurants(token, setRestaurants)
+        getActiveOrder(token, setActiveOrder)
     }, [])
-
-
-    // const getActiveOrder = () => {
-    //     axios.get(`${BASE_URL}active-order`, {
-    //         headers: {
-    //             auth: token
-    //         }
-    //     })
-    //     .then((response)=> {
-    //         console.log(response.data.order)
-    //         setActiveOrder(response.data.order)
-    //     })
-    //     .catch((error)=> {
-    //         console.log(error.data)
-    //     })
-    // }
-    // useEffect(()=> {
-    //     getActiveOrder()
-    // }, [])
-
 
     const onClickCard = (id) => {
         goToRestaurantPage(history, id)
@@ -75,15 +56,6 @@ export default function HomePage() {
                 onClickCard={() => onClickCard(restaurant.id)} />
         })
 
-        // const renderOrder = activeOrder && activeOrder.map((order) => {
-        //     return <ActiveOrderCard
-        //         price={order.totalPrice}
-        //         name={order.restaurantName}
-        //         createdAt={order.createdAt}
-        //         expiresAt={order.expiresAt}
-        //         />
-        // })
-
     return (
         <MainContainer>
             <PageTittleContainer>
@@ -100,12 +72,13 @@ export default function HomePage() {
                 />
             </InputContainer>
             <CategoriesCarrossel
-                handleCategory={handleCategory}
+                handleCategory={handleCategory} 
             />
-            {/* {restaurantsList.length > 0 ? restaurantsList : (<h4>"Nenhum restaurante encontrado</h4>)} */}
+            {/* {restaurantsList.length === 0 ? <h4>Restaurante não encontrado</h4> : restaurantsList} */}
             {restaurantsList.length > 0 ? restaurantsList : <LoadingCard/>}
-            {/* {renderOrder} */}
-            <ActiveOrderCard/>
+            {activeOrder && Object.keys(activeOrder).length > 0 && (
+                <ActiveOrderCard order={activeOrder}/>
+            )}
         </MainContainer >
     )
 }

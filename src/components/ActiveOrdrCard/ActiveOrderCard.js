@@ -1,20 +1,24 @@
 import React from 'react'
 import ClockIcon from '../../assets/clock.svg'
-import { CardContainer, OrderContainer, ClockContainer } from './styled'
+import { CardContainer, OrderContainer, ClockContainer, OrderInProgress } from './styled'
 
-export default function ActiveOrderCard (props) {
+export default function ActiveOrderCard(props) {
 
-    const {name, price, createdAt, expiresAt} = props
+    const { restaurantName, totalPrice, createdAt, expiresAt } = props.order
 
     return (
         <CardContainer>
             <ClockContainer>
-            <img src={ClockIcon}/>
+                <img src={ClockIcon} alt="Relógio" />
             </ClockContainer>
             <OrderContainer>
-            <p>Pedido em andamento</p>
-            <p>Habib's</p>
-            <p>SUBTOTAL: R$59,00</p>
+                <OrderInProgress>Pedido em andamento</OrderInProgress>
+                <p>{restaurantName}</p>
+                <p>
+                    <strong>
+                        SUBTOTAL: {totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                    </strong>
+                </p>
             </OrderContainer>
         </CardContainer>
     )
