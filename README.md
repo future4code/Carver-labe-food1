@@ -3,8 +3,8 @@ Projeto realizado com a tecnologia React.js, esse projeto é 100% para celular, 
 
 Nome dos integrantes: 
 - Pessoa 1 - André Vinicius Marques
-- Pessoa 1 - Eliana Cristina de Deus Santos
-- Pessoa 2 - César Huber
+- Pessoa 1 - César Huber
+- Pessoa 2 - Eliana Cristina de Deus Santos
 - Pessoa 3 - Renan Lopresti Lage
 - Pessoa 4 - Karen Alves de Santana Gaspar
 
