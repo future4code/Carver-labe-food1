@@ -25,14 +25,19 @@ export default function RestaurantPage() {
  const history = useNavigate()
  const params = useParams()
  const { states, setters, requests } = useContext(GlobalContext);
+ const [prodInCart, setProdInCart] = useState()
  const [qnt, setQnt] = useState(1)
  const token = localStorage.getItem('token')
  const [open, setOpen] = useState(false);
- const handleOpen = () => setOpen(true);
+
+ const handleOpen = (prod) =>{ 
+  setProdInCart(prod)
+  setOpen(true);
+ }
  const handleClose = () => setOpen(false);
 
  const putProductInCart = (product) => {
-
+console.log(product)
   let quant
   let newProduct
   let newArray
@@ -70,8 +75,8 @@ export default function RestaurantPage() {
  };
 
  const filterCards = (array, param) => {
-  return (array.filter((prod) => {
-   return (prod.category === param)
+  return (array.filter((prodFilter) => {
+   return (prodFilter.category === param)
   })
    .map((prod) => {
     return (
@@ -83,8 +88,6 @@ export default function RestaurantPage() {
       <Modal
        open={open}
        onClose={handleClose}
-       aria-labelledby="modal-modal-title"
-       aria-describedby="modal-modal-description"
       >
        <Box sx={{
         position: 'absolute',
@@ -119,7 +122,7 @@ export default function RestaurantPage() {
           <MenuItem value={10}>10</MenuItem>
          </Select>
          <Button>
-          <Typography onClick={()=>putProductInCart(prod)} color={"#4a90e2"}>Adicionar no carrinho</Typography>
+          <Typography onClick={()=>putProductInCart(prodInCart)} color={"#4a90e2"}>Adicionar no carrinho</Typography>
          </Button>
         </FormControl>
        </Box>
