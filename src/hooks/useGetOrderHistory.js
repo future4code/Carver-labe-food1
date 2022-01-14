@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { token } from '../constants/tempTokenCesar' //substituir por localstorage
 import { BASE_URL } from '../constants/url'
 import { useEffect, useContext } from 'react'
 import { GlobalContext } from '../contexts/GlobalStateContext'
@@ -8,6 +7,7 @@ export const useGetOrderHistory = (setOrderHistory, setLoadingHistory) => {
 
     const url = `${BASE_URL}orders/history`
     const { setters } = useContext(GlobalContext)
+    const token = localStorage.getItem('token')
 
     useEffect(() => {
         setters.setIsLoading(true)

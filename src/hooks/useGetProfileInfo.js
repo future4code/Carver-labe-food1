@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { token } from '../constants/tempTokenCesar' //substituir por localstorage
 import { BASE_URL } from '../constants/url'
 import { GlobalContext } from '../contexts/GlobalStateContext'
 import { useContext, useEffect } from 'react'
@@ -8,6 +7,7 @@ export const useGetProfileInfo = () => {
 
     const url = `${BASE_URL}profile`
     const { setters } = useContext(GlobalContext)
+    const token = localStorage.getItem('token')
 
     useEffect(() => {
         setters.setIsLoading(true)
