@@ -7,7 +7,7 @@ export default function RestaurantCard(props) {
  const { name, shipping, deliveryTime, logoUrl, onClickCard } = props
 
   return (
-    <MainContainer>
+    <MainContainer variant="outlined" style={{ borderRadius: 10 }}>
       <RestaurantContainer onClick={onClickCard}>
         <ImageContainer
           image={logoUrl}
@@ -24,7 +24,7 @@ export default function RestaurantCard(props) {
           </div>
           <ShippingContainer>
             <Typography variant="body2" color="textSecondary" component="p">
-              Frete {shipping},00
+              Frete {shipping.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
             </Typography>
           </ShippingContainer>
         </DescriptionContainer>

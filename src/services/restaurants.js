@@ -18,3 +18,20 @@ export const getRestaurantDetail = (id, setRestaurant, token, getCategorys, setC
    setIsLoading(false)
   })
 }
+
+export const getRestaurants = (token, setRestaurants) => {
+  axios.get(`${BASE_URL}restaurants`, {
+      headers: {
+          auth: token
+      }
+  })
+      .then((response) => {
+          setRestaurants(response.data.restaurants)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+
+
+}
+
