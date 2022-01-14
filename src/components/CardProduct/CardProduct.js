@@ -14,7 +14,7 @@ export default function CardProduct({ product, functionButton }) {
  const {states} = useContext(GlobalContext)
 
  return (
-  <Card sx={{ width: 305, display: 'flex', mb:1 }}>
+  <Card sx={{ width: 305, display: 'flex', mb: 1 }}>
    <CardMedia
     component="img"
     sx={{ width: 100 }}

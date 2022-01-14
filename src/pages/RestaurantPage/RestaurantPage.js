@@ -11,6 +11,13 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import useProtectedPage from "../../hooks/useProtectedPage"
 
 export default function RestaurantPage() {
@@ -18,30 +25,33 @@ export default function RestaurantPage() {
  const history = useNavigate()
  const params = useParams()
  const { states, setters, requests } = useContext(GlobalContext);
+ const [qnt, setQnt] = useState(1)
  const token = localStorage.getItem('token')
+ const [open, setOpen] = useState(false);
+ const handleOpen = () => setOpen(true);
+ const handleClose = () => setOpen(false);
 
  const putProductInCart = (product) => {
-  
+
   let quant
   let newProduct
   let newArray
 
   const index = states.cart.findIndex((item) => item.id === product.id)
-  if (index !== -1) { 
-   quant = states.cart[index].quantity + 1
+  if (index !== -1) {
+   quant = states.cart[index].quantity + qnt
    newProduct = { ...states.cart[index], quantity: quant }
    newArray = [...states.cart, newProduct]
    newArray.splice(index, 1)
    setters.setCart(newArray)
-   localStorage.setItem("cart", JSON.stringify(newArray))
   } else {
    newProduct = { ...product, quantity: 1 }
    newArray = [...states.cart, newProduct]
    setters.setCart(newArray)
-   localStorage.setItem("cart", JSON.stringify(newArray))
   }
   alert("produto adicionado no carrinho")
   setters.setIdRestaurant(params.id)
+  handleClose()
  }
 
 
@@ -55,17 +65,66 @@ export default function RestaurantPage() {
   return arr
  }
 
+ const handleChange = (event) => {
+  setQnt(event.target.value);
+ };
+
  const filterCards = (array, param) => {
   return (array.filter((prod) => {
    return (prod.category === param)
   })
    .map((prod) => {
     return (
-     <CardProduct
-      key={prod.id}
-      product={prod}
-      functionButton={putProductInCart}
-     />
+     <div key={prod.id}>
+      <CardProduct
+       product={prod}
+       functionButton={handleOpen}
+      />
+      <Modal
+       open={open}
+       onClose={handleClose}
+       aria-labelledby="modal-modal-title"
+       aria-describedby="modal-modal-description"
+      >
+       <Box sx={{
+        position: 'absolute',
+        top: '40%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '70%',
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        p: 4,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+       }}>
+        <Typography sx={{ margin: "10% 0 10% 0" }}>Selecione a quantidade desejada</Typography>
+        <FormControl fullWidth>
+         <Select
+          sx={{ mb: "10%" }}
+          value={qnt}
+          inputProps={{ 'aria-label': 'Without label' }}
+          onChange={handleChange}
+         >
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={7}>7</MenuItem>
+          <MenuItem value={8}>8</MenuItem>
+          <MenuItem value={9}>9</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+         </Select>
+         <Button>
+          <Typography onClick={()=>putProductInCart(prod)} color={"#4a90e2"}>Adicionar no carrinho</Typography>
+         </Button>
+        </FormControl>
+       </Box>
+      </Modal>
+     </div>
     )
    }))
  }
@@ -87,7 +146,7 @@ export default function RestaurantPage() {
      <ArrowBackIosNewIcon
       size="large"
       sx={{ color: "black", mr: 2 }}
-      onClick={()=>goToHomePage(history)}
+      onClick={() => goToHomePage(history)}
      />
      <Typography
       sx={{ position: "relative", left: "-20px", margin: "0 auto" }}
