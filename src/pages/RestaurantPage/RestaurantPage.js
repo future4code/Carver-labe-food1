@@ -21,11 +21,13 @@ export default function RestaurantPage() {
   console.log(params.id)
 
  const putProductInCart = (product) => {
+  
   let quant
   let newProduct
   let newArray
+
   const index = states.cart.findIndex((item) => item.id === product.id)
-  if (index !== -1) {
+  if (index !== -1) { 
    quant = states.cart[index].quantity + 1
    newProduct = { ...states.cart[index], quantity: quant }
    newArray = [...states.cart, newProduct]

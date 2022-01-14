@@ -5,13 +5,14 @@ import { GlobalContext } from "../../contexts/GlobalStateContext"
 import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10} from "./styled";
 import { SettingsPowerSharp } from "@mui/icons-material";
 import { goToHomePage } from "../../routes/coordinator";
+import {BASE_URL} from '../../constants/url'
 
 export default function CartPage() {
 
     const navigate = useNavigate()
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IklzTFl5UjlMNW5zemNHRGQ4bmlKIiwibmFtZSI6IkFuZHLDqSBNYXJxdWVzIiwiZW1haWwiOiJhbmRyZW1hcnF1ZXNAZ21haWwuY29tIiwiY3BmIjoiMjIyLDIyMiwyMjItMjIiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUnVhIEpvYXF1aW0gRmVybmFuZGVzLCAyMTEsIDcxIC0gVmlsYSBOb2d1ZWlyYSIsImlhdCI6MTY0MTg1NDQ0M30.NGAp6nbdH24nsPQ9lQxUSd_zOpeQwB2sbbRHrkJ-EJs"
-    const aaa = "rappi4A"
     const [restaurantData, setRestaurantData] = useState("")
+    const [qtd, setQnd] = useState(0)
     const [address, setAddress] = useState()
     const [paymentMethod, setPaymentMethod] = useState("money")
     let order = {
@@ -19,36 +20,25 @@ export default function CartPage() {
         paymentMethod: paymentMethod
     }
     const { states, setters, requests } = useContext(GlobalContext);
-
+    const [cart, setCart] = useState(states.cart)
     let total = 0
 
     useEffect(() => {
         getRestaurant()
         getAddress()
-        localStorage.getItem("cart")
-       
     }, [])
 
-    const newCart = localStorage.getItem("cart")
-    const cart = JSON.parse(newCart)
-    console.log(cart)
-
-  
-    cart.forEach((item) => {
-    const prod = {id: item.id, quantity: item.quantity}
-    order.products.push(prod)
-    })
-    console.log(order)
+    useEffect(() => {
+     renderCart()
+    }, [qtd])
 
     const getRestaurant = () => {
-
-        axios.get(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/${states.idRestaurant}`, {
+        axios.get(`${BASE_URL}restaurants/${states.idRestaurant}`, {
             headers: {
                 auth: token,
             }
         })
         .then((res) => {
-            // setRestaurant(res.data.restaurant.products)
             setRestaurantData(res.data.restaurant)
         })
         .catch((err) => {
@@ -57,15 +47,13 @@ export default function CartPage() {
     }
     
     const getAddress = () => {
-
-        axios.get(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/profile/address`, {
+        axios.get(`${BASE_URL}profile/address`, {
             headers: {
                 auth: token
             }
         })
         .then((res) => {
-            setAddress(res.data.address)
-            
+            setAddress(res.data.address)    
         })
         .catch((err) => {
             console.log(err.response.data)
@@ -73,18 +61,18 @@ export default function CartPage() {
     }
 
     const placeOrder = () => {
-
+        cart.forEach((item) => {
+            const prod = {id: item.id, quantity: item.quantity}
+            order.products.push(prod)
+        })
         const body = order
-        console.log(body)
 
-        axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/${states.idRestaurant}/order`, body, {
+        axios.post(`${BASE_URL}restaurants/${states.idRestaurant}/order`, body, {
             headers: {
                 auth: token
             }
         })
         .then((res) => {
-            console.log(res.data)
-            setters.cart("")
             alert("Pedido efetuado com sucesso!")
             goToHomePage(navigate)
         })
@@ -94,69 +82,52 @@ export default function CartPage() {
         })
     }
 
-    // const getActiveOrder = () => {
+    const renderCart = () => {
 
+        cart.forEach((rest) => {
+            total += rest.quantity  * rest.price
+        })
 
-    //     axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/active-order`, {
-    //         headers: {
-    //             auth: token
-    //         }
-    //     })
-    //     .then((res) => {
-    //         console.log(res.data)
-    //     })
-    //     .catch((err) => {
-    //         console.log(err.response.data)
-    //     })
-    // }
+       return (cart.map((item) => {
 
-    cart.forEach((rest) => {
-        total += rest.quantity  * rest.price
-    })
-    
-    const renderItem = cart.map((item) => {
-
-        return(
-            
-        <DivItem key={item.id}>
-            <DivImage>
-                <ImG src={item.photoUrl} alt="item.name"/>
-            </DivImage>
-            <DivDescription>
+            return(
                 
-                
+            <DivItem key={item.id}>
+                <DivImage>
+                    <ImG src={item.photoUrl} alt="item.name"/>
+                </DivImage>
+                <DivDescription>
                     <SpanRest1>{item.quantity}</SpanRest1>
                     <SpanRest2>{item.name}</SpanRest2>
                     <SpanRest3>{item.description}</SpanRest3>
-                    <SpanRest4>{Number(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</SpanRest4>
-                
-                
-                    <ButtonRest>Remover</ButtonRest>
-                
-            </DivDescription>
-        </DivItem>
-        )
-    })
+                    <SpanRest4>{Number(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</SpanRest4>                
+                    <ButtonRest onClick={() => deleteItemCart(item.id)}>Remover</ButtonRest>                   
+                </DivDescription>
+            </DivItem>
+            )
+        }))
+    }
 
+    const deleteItemCart = (id) => {
+        for(let i = 0; i < cart.length; i++){
+            if(cart[i].id === id){
+                if(cart[i].quantity !== 1){
+                    cart[i].quantity -= 1
+                    setQnd(qtd + 1)               
+                } else {
+                    cart.splice(cart[i], 1)
+                    setQnd(qtd + 1)
+                }
+            } 
+        }
+    }
+  
     const onChangePaymentMethods = (e) => {
         setPaymentMethod(e.target.value)
     }
 
-    // const deleteItemCart = (id) => {
-    //     console.log(id)
-    //     for(let i = 0; i < cart.lenght; i++){
-    //         if(cart[i].id === id){
-    //             if(cart[i].quantity > 1){
-    //                 cart[i].quantity = cart[i].quantity -1
-    //             }
-    //         } else {
-    //             cart.splice(cart[i], 1)
-    //         }
-    //     }
-    // }
-
  return(
-  <DivMain>
+    <DivMain>
       <DivHeader>
         <h3>Meu carrinho</h3>
       </DivHeader>
@@ -174,7 +145,7 @@ export default function CartPage() {
         </DivRestaurant>
 
         <DivItems>
-            {renderItem}
+            {renderCart()}
         </DivItems>
 
         <DivDelivery>
@@ -204,6 +175,6 @@ export default function CartPage() {
             <Button onClick={placeOrder}>Confirmar</Button>
         </DivButton>
       </DivScroll>
-  </DivMain>
+    </DivMain>
  )
 }
