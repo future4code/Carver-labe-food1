@@ -14,7 +14,6 @@ export default function CartPage() {
     const [restaurantData, setRestaurantData] = useState("")
     const [qtd, setQnd] = useState(0)
     const [address, setAddress] = useState()
-
     const [paymentMethod, setPaymentMethod] = useState("money")
     let order = {
         products: [],
@@ -76,10 +75,12 @@ export default function CartPage() {
         .then((res) => {
             alert("Pedido efetuado com sucesso!")
             goToHomePage(navigate)
+            setCart("")
         })
         .catch((err) => {
             alert(err.response.data.message)
             goToHomePage(navigate)
+            setCart("")
         })
     }
 
