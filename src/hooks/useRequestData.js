@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext } from 'react'
 import { GlobalContext } from '../contexts/GlobalStateContext'
 import axios from 'axios'
-import { token } from '../constants/tempTokenCesar'
 
 const useRequestData = (initialData, url) => {
 
   const { states, setters } = useContext(GlobalContext)
   const [data, setData] = useState(initialData)
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     setters.setIsLoading(true)
