@@ -15,10 +15,10 @@ import Footer from "../components/Footer/Footer";
 export default function Router() {
 
     const pathname = window.location.pathname
+    const token = localStorage.getItem('token')
 
     return (
         <BrowserRouter>
-            {pathname !== '/login' && pathname !== '/perfil/cadastro' && pathname !== '/endereco/cadastro' && <Footer />}
             <Routes>
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/perfil/cadastro' element={<SignUpPage />} />
@@ -30,8 +30,8 @@ export default function Router() {
                 <Route path='/perfil/editar' element={<EditProfilePage />} />
                 <Route path='/endereco/editar' element={<EditAddressPage />} />
                 <Route element={<ErrorPage />} />
-
             </Routes>
+            {token !== null && pathname !== '/login' && pathname !== '/perfil/cadastro' && pathname !== '/endereco/cadastro' && <Footer />}
         </BrowserRouter>
     )
 }
