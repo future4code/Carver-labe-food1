@@ -1,24 +1,24 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GlobalContext } from "../../contexts/GlobalStateContext";
 import { getRestaurantDetail } from "../../services/restaurants"
-import LoadingText from '../../components/Loading/LoadingText'
 import LoadingCard from "../../components/Loading/LoadingCard";
-import { BodyContainer, ProductsContainer } from "./styled";
+import { goToHomePage } from "../../routes/coordinator";
+import { BodyContainer, ProductsContainer, Line } from "./styled";
 import RestaurantDetail from "./RestaurantsDetail";
 import CardProduct from "../../components/CardProduct/CardProduct";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Step } from "@mui/material";
+import useProtectedPage from "../../hooks/useProtectedPage"
 
 export default function RestaurantPage() {
+ useProtectedPage()
+ const history = useNavigate()
  const params = useParams()
  const { states, setters, requests } = useContext(GlobalContext);
  const token = localStorage.getItem('token')
-
-  console.log(params.id)
 
  const putProductInCart = (product) => {
   
@@ -44,7 +44,6 @@ export default function RestaurantPage() {
   setters.setIdRestaurant(params.id)
  }
 
- console.log(states.isLoading)
 
  const getCategorys = (array) => {
   let arr = [];
@@ -71,7 +70,6 @@ export default function RestaurantPage() {
    }))
  }
 
-
  useEffect(() => {
   getRestaurantDetail(
    params.id,
@@ -89,6 +87,7 @@ export default function RestaurantPage() {
      <ArrowBackIosNewIcon
       size="large"
       sx={{ color: "black", mr: 2 }}
+      onClick={()=>goToHomePage(history)}
      />
      <Typography
       sx={{ position: "relative", left: "-20px", margin: "0 auto" }}
@@ -107,8 +106,8 @@ export default function RestaurantPage() {
    {states.isLoading ? <LoadingCard /> : states.categorys.map((cat) => {
     return (
      <ProductsContainer key={cat}>
-      <Typography sx={{mb:1, mr:30}} variant="h7">{cat}</Typography>
-      <div class="hr"></div>
+      <Typography sx={{ mb: 1, mr: 30 }} variant="h7">{cat}</Typography>
+      <Line></Line>
       {filterCards(states.restaurant.products, cat)}
      </ProductsContainer>
     )

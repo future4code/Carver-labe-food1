@@ -14,7 +14,6 @@ import ActiveOrderCard from "../../components/ActiveOrdrCard/ActiveOrderCard"
 
 
 export default function HomePage() {
-
     useProtectedPage()
     const [searchFor, setSearchFor] = useState('')
     const [restaurants, setRestaurants] = useState([])
