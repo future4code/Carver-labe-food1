@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { GlobalContext } from "../../contexts/GlobalStateContext";
 import { getRestaurantDetail } from "../../services/restaurants"
+import LoadingText from '../../components/Loading/LoadingText'
+import LoadingCard from "../../components/Loading/LoadingCard";
 import { BodyContainer, ProductsContainer } from "./styled";
 import RestaurantDetail from "./RestaurantsDetail";
 import CardProduct from "../../components/CardProduct/CardProduct";
@@ -31,16 +33,19 @@ export default function RestaurantPage() {
    newArray = [...states.cart, newProduct]
    newArray.splice(index, 1)
    setters.setCart(newArray)
-   
+   localStorage.setItem("cart", JSON.stringify(newArray))
   } else {
    newProduct = { ...product, quantity: 1 }
    newArray = [...states.cart, newProduct]
    setters.setCart(newArray)
-   
+   localStorage.setItem("cart", JSON.stringify(newArray))
   }
+  alert("produto adicionado no carrinho")
   setters.setIdRestaurant(params.id)
  }
- 
+
+ console.log(states.isLoading)
+
  const getCategorys = (array) => {
   let arr = [];
   array.products.map((prod) => {
@@ -68,7 +73,13 @@ export default function RestaurantPage() {
 
 
  useEffect(() => {
-  getRestaurantDetail(params.id, setters.setRestaurant, token, getCategorys, setters.setCategorys)
+  getRestaurantDetail(
+   params.id,
+   setters.setRestaurant,
+   token, getCategorys,
+   setters.setCategorys,
+   setters.setIsLoading
+  )
  }, [])
 
  return (
@@ -89,17 +100,19 @@ export default function RestaurantPage() {
    </AppBar>
    {states.restaurant && (
     <RestaurantDetail
+     isLoading={states.isLoading}
      restaurant={states.restaurant}
     />
    )}
-    {states.categorys && (states.categorys.map((cat) => {
-     return (
-      <ProductsContainer key={cat}>
-       <Typography variant="h7">{cat}</Typography>
-       {filterCards(states.restaurant.products, cat)}
-      </ProductsContainer>
-     )
-    }))}
+   {states.isLoading ? <LoadingCard /> : states.categorys.map((cat) => {
+    return (
+     <ProductsContainer key={cat}>
+      <Typography sx={{mb:1, mr:30}} variant="h7">{cat}</Typography>
+      <div class="hr"></div>
+      {filterCards(states.restaurant.products, cat)}
+     </ProductsContainer>
+    )
+   })}
   </BodyContainer>
  )
 }

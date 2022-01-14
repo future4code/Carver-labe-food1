@@ -1,18 +1,17 @@
 import React, { useContext, useEffect, useState } from "react"
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard"
 import useProtectedPage from '../../hooks/useProtectedPage'
-// import { GlobalContext } from '../../contexts/GlobalStateContext'
-import useRequestData from '../../hooks/useRequestData'
-import { BASE_URL } from '../../constants/url'
+import { GlobalContext } from '../../contexts/GlobalStateContext'
+import {getRestaurants} from '../../services/restaurants'
+import {getActiveOrder} from '../../services/order'
 import { Input, MainContainer, InputContainer, PageTittleContainer, TittleNavContainer } from "./styled"
 import SearchIcon from "../../assets/search.svg"
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { goToRestaurantPage } from "../../routes/coordinator"
 import CategoriesCarrossel from "../../components/CategoriesCarrossel/CategoriesCarrossel"
+import LoadingCard from "../../components/Loading/LoadingCard"
+import ActiveOrderCard from "../../components/ActiveOrdrCard/ActiveOrderCard"
+
 
 export default function HomePage() {
 
@@ -20,28 +19,15 @@ export default function HomePage() {
     const [searchFor, setSearchFor] = useState('')
     const [restaurants, setRestaurants] = useState([])
     const [categories, setCategories] = useState('')
+    const [activeOrder, setActiveOrder] = useState({})
+    const { states, setters } = useContext(GlobalContext)
     const history = useNavigate()
-
-
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkEwMDVtSEJmeVNrdDdPTjBITGFwIiwibmFtZSI6IkFzdHJvZGV2IiwiZW1haWwiOiJhc3Ryb2RldkBmdXR1cmU0LmNvbSIsImNwZiI6IjMzMy44ODguNjY2LTQ0IiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlJ1YSBQcmF0ZXMsIDYxMyAtIEJvbSBSZXRpcm8iLCJpYXQiOjE2NDE4NTg2NjR9.h2sLzEO7-RUZNiVvQ0KKVbVszyoAVkif0-wONTehV94"
-
-    const getRestaurants = () => {
-        axios.get(`${BASE_URL}restaurants`, {
-            headers: {
-                auth: token
-            }
-        })
-            .then((response) => {
-                console.log(response.data.restaurants)
-                setRestaurants(response.data.restaurants)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ink5bDhrV25rUVdzNk1SWk5DbzZHIiwibmFtZSI6IkthcmVuIiwiZW1haWwiOiJrYUBsYWJlbnUuY29tIiwiY3BmIjoiMjI5LjIyOS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQWZvbnNvIEJyYXosIDMyMCwgNzcgLSBWaWxhIE4uIENvbmNlacOnw6NvIiwiaWF0IjoxNjQyMTI1MTY0fQ.dNP0n_dhdva69harAH8iPiPHfd4Ji_CzwNTOJzXnjoY"
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkZsSW5tZFBVVk5nRUdndWxkd3JZIiwibmFtZSI6IkthcmVuIiwiZW1haWwiOiJrYXJlbkBmdXR1cmU0LmNvbSIsImNwZiI6IjIyOS4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTY0MjEyNjA0OH0.p5IT0TmOH5M-HmcVrh-1Nzus402Yf7bOPCxpE7LxQcY"
 
     useEffect(() => {
-        getRestaurants()
+        getRestaurants(token, setRestaurants)
+        getActiveOrder(token, setActiveOrder)
     }, [])
 
     const onClickCard = (id) => {
@@ -58,7 +44,7 @@ export default function HomePage() {
 
     const restaurantsList = restaurants && restaurants
         .filter((restaurant) => {
-            return (restaurant.name.toLowerCase().includes(searchFor) && restaurant.category.includes(categories))
+            return ((restaurant.name.toLowerCase().includes(searchFor) || restaurant.name.includes(searchFor)) && restaurant.category.includes(categories))
         })
         .map((restaurant) => {
             return <RestaurantCard
@@ -72,16 +58,6 @@ export default function HomePage() {
 
     return (
         <MainContainer>
-            {/* <AppBar color="secondary">
-                <Toolbar>
-                    <Typography
-                        sx={{ position: "relative", margin: "0 auto"}}
-                        color="black"
-                        component="div"
-                        variant="h6"
-                    >Rappi4</Typography>
-                </Toolbar>
-            </AppBar> */}
             <PageTittleContainer>
                 <TittleNavContainer>
                     Rappi4
@@ -93,14 +69,16 @@ export default function HomePage() {
                     placeholder="Restaurante"
                     onChange={handleSearchBar}
                     value={searchFor}
-                    type="search"
-                    id="standard-search"
                 />
             </InputContainer>
             <CategoriesCarrossel
-                handleCategory={handleCategory}
+                handleCategory={handleCategory} 
             />
-            {restaurantsList.length > 0 ? restaurantsList : <h4>"Nenhum restaurante encontrado"</h4>}
+            {/* {restaurantsList.length === 0 ? <h4>Restaurante não encontrado</h4> : restaurantsList} */}
+            {restaurantsList.length > 0 ? restaurantsList : <LoadingCard/>}
+            {activeOrder && Object.keys(activeOrder).length > 0 && (
+                <ActiveOrderCard order={activeOrder}/>
+            )}
         </MainContainer >
     )
 }

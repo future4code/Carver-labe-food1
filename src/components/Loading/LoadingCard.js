@@ -5,7 +5,7 @@ import Skeleton from '@mui/material/Skeleton'
 export default function LoadingCard() {
     return (
         <LoadingContainer>
-            <Skeleton animation="wave" variant="rectangular" width={200} height={100} />
+            <Skeleton animation="wave" variant="rectangular" width={328} height={188} />
         </LoadingContainer>
     )
 }
