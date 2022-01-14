@@ -1,12 +1,17 @@
-import React from "react";
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import React, { useContext } from "react"
+import Card from '@mui/material/Card'
+import CardMedia from '@mui/material/CardMedia'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import { useParams } from 'react-router-dom'
+import { GlobalContext } from '../../contexts/GlobalStateContext'
 
 export default function CardProduct({ product, functionButton }) {
+
+ const params = useParams()
+ const {states} = useContext(GlobalContext)
 
  return (
   <Card sx={{ width: 305, display: 'flex', mb:1 }}>
@@ -22,7 +27,7 @@ export default function CardProduct({ product, functionButton }) {
      <Typography>{product.description}</Typography>
      <Typography>{`${product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</Typography>
     </CardContent>
-    <Button onClick={() => functionButton(product)}>Adicionar</Button>
+    <Button onClick={() => functionButton(product)} disabled={states.idRestaurant !== null && params.id !== states.idRestaurant}>Adicionar</Button>
    </Box>
   </Card>
  )
