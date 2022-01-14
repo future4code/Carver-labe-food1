@@ -1,18 +1,24 @@
 import React from "react";
-import { DetailContainer, Img, ImgContainer } from "./styled";
+import { DetailContainer, Img, ImgContainer, FreteContainer, TextContainer } from "./styled";
+import LoadingText from '../../components/Loading/LoadingText'
+import LoadingCard from "../../components/Loading/LoadingCard";
 import Typography from '@mui/material/Typography';
 
-export default function RestaurantDetail({ restaurant }) {
+export default function RestaurantDetail({ restaurant, isLoading }) {
  return (
   <DetailContainer>
    <ImgContainer>
-    <Img src={restaurant.logoUrl}></Img>
+    {isLoading ? <LoadingCard /> : <Img src={restaurant.logoUrl}></Img>}
    </ImgContainer>
-   <Typography>{restaurant.name}</Typography>
-   <Typography>{restaurant.category}</Typography>
-   <Typography>{`${restaurant.deliveryTime}-${restaurant.deliveryTime - (10)} min`}</Typography>
-   <Typography>{`Frete: R$${restaurant.shipping},00`}</Typography>
-   <Typography>{restaurant.address}</Typography>
+   <TextContainer>
+    <Typography variant="h6" color="primary">{isLoading ? <LoadingText /> : restaurant.name}</Typography>
+    <Typography color="gray">{isLoading ? <LoadingText /> : restaurant.category}</Typography>
+    <FreteContainer>
+     <Typography color="gray">{isLoading ? <LoadingText /> : `${restaurant.deliveryTime}-${restaurant.deliveryTime - (10)} min`}</Typography>
+     <Typography color="gray">{isLoading ? <LoadingText /> : `Frete: R$${restaurant.shipping},00`}</Typography>
+    </FreteContainer>
+    <Typography color="gray">{isLoading ? <LoadingText /> : restaurant.address}</Typography>
+   </TextContainer>
   </DetailContainer>
  )
 }

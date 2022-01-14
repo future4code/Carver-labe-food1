@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 export default function CardProduct({ product, functionButton }) {
 
  return (
-  <Card sx={{ width: 305, display: 'flex' }}>
+  <Card sx={{ width: 305, display: 'flex', mb:1 }}>
    <CardMedia
     component="img"
     sx={{ width: 100 }}

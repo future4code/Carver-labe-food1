@@ -13,7 +13,6 @@ const GlobalState = (props) => {
  const setters = { setCart, setIsLoading, setProfile, setRestaurant, setCategorys, setIdRestaurant }
 
  const requests = {}
- console.log(cart)
  return (
   <GlobalContext.Provider value={{ states, setters, requests }}>
    {props.children}
