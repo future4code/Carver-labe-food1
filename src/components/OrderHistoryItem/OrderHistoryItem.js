@@ -7,23 +7,26 @@ import { GlobalContext } from '../../contexts/GlobalStateContext'
 export default function OrderHistoryItem() {
     const [orderHistory, setOrderHistory] = useState([])
     const { states } = useContext(GlobalContext)
+    const [loadingHist, setLoadingHist] = useState(false)
 
-    useGetOrderHistory(setOrderHistory)
+    useGetOrderHistory(setOrderHistory, setLoadingHist)
 
     const renderHistory = orderHistory.map((order, index) => {
         return (
             <OrderHistoryMainContainer key={index}>
-                {states.isLoading ? <LoadingCard /> : 
-                orderHistory.length > 0 ? 
-                <OrderHistoryItemContainer>
-                    <h1>{order.restaurantName}</h1>
-                    <p>{new Intl.DateTimeFormat('pt-BR', {day: '2-digit', month: 'long', year: 'numeric'}).format(order.createdAt)}</p>
-                    <h2>SUBTOTAL {order.totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h2>
-                </OrderHistoryItemContainer>
+                {orderHistory.length > 0 ?
+                    loadingHist ? 
+                        <LoadingCard /> 
+                    :
+                        <OrderHistoryItemContainer>
+                            <h1>{order.restaurantName}</h1>
+                            <p>{new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }).format(order.createdAt)}</p>
+                            <h2>SUBTOTAL {order.totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h2>
+                        </OrderHistoryItemContainer>
                 :
-                <BlankOrderHistoryContainer>
-                    <p>Você não realizou nenhum pedido</p>
-                </BlankOrderHistoryContainer>
+                    <BlankOrderHistoryContainer>
+                        <p>Você não realizou nenhum pedido</p>
+                    </BlankOrderHistoryContainer>
                 }
             </OrderHistoryMainContainer>
         )

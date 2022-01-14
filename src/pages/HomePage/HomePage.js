@@ -14,7 +14,6 @@ import {getActiveOrder} from '../../services/order'
 
 
 export default function HomePage() {
-
     useProtectedPage()
     const [searchFor, setSearchFor] = useState('')
     const [restaurants, setRestaurants] = useState([])
