@@ -6,10 +6,11 @@ const GlobalState = (props) => {
  const [cart, setCart] = useState([])
  const [ profile, setProfile ] = useState({})
  const [restaurant, setRestaurant] = useState({})
+ const [idRestaurant, setIdRestaurant] = useState()
  const [categorys, setCategorys] = useState([])
 
- const states = { cart, isLoading, profile, restaurant, categorys }
- const setters = { setCart, setIsLoading, setProfile, setRestaurant, setCategorys }
+ const states = { cart, isLoading, profile, restaurant, categorys, idRestaurant }
+ const setters = { setCart, setIsLoading, setProfile, setRestaurant, setCategorys, setIdRestaurant }
 
  const requests = {}
  console.log(cart)

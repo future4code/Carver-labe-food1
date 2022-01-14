@@ -178,6 +178,7 @@ export const SpanRest1 = styled.span`
     align-self: flex-end;
     padding: 0 15px;
     height: 30px;
+    color: #e86e5a;
 `
 
 export const SpanRest2 = styled.span`
