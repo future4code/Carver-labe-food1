@@ -323,6 +323,22 @@ export const Button = styled.button`
     border: none;
 `
 
+export const DisabledButton = styled.button`
+    width: 100%;
+    height: 30px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    text-align: center;
+    color: #000;
+    background-color: rgba(232, 110, 90, 0.5);
+    border: none;
+`
+
 export const DivScroll = styled.div`
     display: flex;
     flex-direction: column;
