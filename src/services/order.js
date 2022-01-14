@@ -8,10 +8,8 @@ export const getActiveOrder = (setActiveOrder) => {
         }
     })
         .then((response) => {
-            console.log(response.data.order)
             setActiveOrder(response.data.order)
         })
         .catch((error) => {
-            console.log(error.data)
         })
 }

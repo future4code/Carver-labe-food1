@@ -2,8 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalStateContext"
-import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10} from "./styled";
-
+import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10, DisabledButton} from "./styled";
 import { goToHomePage } from "../../routes/coordinator";
 import {BASE_URL} from '../../constants/url'
 
@@ -29,6 +28,12 @@ export default function CartPage() {
     }, [])
 
     useEffect(() => {
+        if (cart.length === 0) {
+            setters.setIdRestaurant(null)
+        }
+    }, [qtd])
+
+    useEffect(() => {
      renderCart()
     }, [qtd])
 
@@ -42,7 +47,6 @@ export default function CartPage() {
             setRestaurantData(res.data.restaurant)
         })
         .catch((err) => {
-            console.log(err.response.data.message)
         })
     }
     
@@ -56,7 +60,6 @@ export default function CartPage() {
             setAddress(res.data.address)    
         })
         .catch((err) => {
-            console.log(err.response.data)
         })
     }
 
@@ -139,17 +142,20 @@ export default function CartPage() {
         </DivAdress>
 
         <DivRestaurant>
-            <Span3>{restaurantData.name}</Span3>
-            <Span4>{restaurantData.address}</Span4>
-            <Span5>{restaurantData.deliveryTime - 10} - {restaurantData.deliveryTime} min</Span5>
+            {cart.length > 0 && 
+            <>
+                <Span3>{restaurantData.name}</Span3>
+                <Span4>{restaurantData.address}</Span4>
+                <Span5>{restaurantData.deliveryTime - 10} - {restaurantData.deliveryTime} min</Span5>
+            </>}
         </DivRestaurant>
 
         <DivItems>
-            {renderCart()}
+            {cart.length > 0 ? renderCart() : 'Seu carrinho está vazio'}
         </DivItems>
 
         <DivDelivery>
-            <Span6>Frete {Number(restaurantData.shipping).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</Span6>
+            <Span6>Frete {cart.length > 0 ? Number(restaurantData.shipping).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }</Span6>
         </DivDelivery>
 
         <DivSubTotal>
@@ -172,7 +178,11 @@ export default function CartPage() {
         </DivPaymentMethods>
 
         <DivButton>
-            <Button onClick={placeOrder}>Confirmar</Button>
+            {cart.length > 0 ?
+            <Button onClick={placeOrder} disabled={false}>Confirmar</Button>
+            :
+            <DisabledButton onClick={placeOrder} disabled={true}>Confirmar</DisabledButton>
+            }
         </DivButton>
       </DivScroll>
     </DivMain>
