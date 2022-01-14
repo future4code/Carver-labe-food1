@@ -47,7 +47,7 @@ const SignUpForm = () => {
     const { control, handleSubmit } = form;
 
     const onSubmit = () => {
-        signUp(form.getValues(), form.reset(), history, setIsLoading);
+        signUp(form.getValues(), history, setIsLoading);
     };
 
     return (

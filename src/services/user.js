@@ -20,14 +20,13 @@ export const login = (body, history, setIsLoading) => {
         });
 };
 
-export const signUp = (body, clear, history, setIsLoading) => {
+export const signUp = (body, history, setIsLoading) => {
     setIsLoading(true)
     axios.post(`${BASE_URL}signup`, body)
         .then((res) => {
             localStorage.setItem("token", res.data.token)
             goToSignAddressPage(history)
             setIsLoading(false)
-            clear()
         })
         .catch((err) => {
             setIsLoading(false)
