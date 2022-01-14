@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 export default function CardProduct({ product, functionButton }) {
 
  return (
-  <Card sx={{ width: 305, display: 'flex', mb:1 }}>
+  <Card sx={{ width: 305, display: 'flex', mb: 1 }}>
    <CardMedia
     component="img"
     sx={{ width: 100 }}
@@ -22,7 +22,7 @@ export default function CardProduct({ product, functionButton }) {
      <Typography>{product.description}</Typography>
      <Typography>{`${product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</Typography>
     </CardContent>
-    <Button onClick={() => functionButton(product)}>Adicionar</Button>
+    <Button onClick={() => functionButton()}>Adicionar</Button>
    </Box>
   </Card>
  )
