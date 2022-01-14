@@ -19,10 +19,10 @@ export const getRestaurantDetail = (id, setRestaurant, token, getCategorys, setC
   })
 }
 
-export const getRestaurants = (token, setRestaurants) => {
+export const getRestaurants = (setRestaurants) => {
   axios.get(`${BASE_URL}restaurants`, {
       headers: {
-          auth: token
+          auth: localStorage.getItem("token")
       }
   })
       .then((response) => {
