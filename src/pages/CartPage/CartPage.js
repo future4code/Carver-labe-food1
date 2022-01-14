@@ -5,12 +5,12 @@ import { GlobalContext } from "../../contexts/GlobalStateContext"
 import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10} from "./styled";
 import { SettingsPowerSharp } from "@mui/icons-material";
 import { goToHomePage } from "../../routes/coordinator";
+import {BASE_URL} from '../../constants/url'
 
 export default function CartPage() {
 
     const navigate = useNavigate()
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IklzTFl5UjlMNW5zemNHRGQ4bmlKIiwibmFtZSI6IkFuZHLDqSBNYXJxdWVzIiwiZW1haWwiOiJhbmRyZW1hcnF1ZXNAZ21haWwuY29tIiwiY3BmIjoiMjIyLDIyMiwyMjItMjIiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUnVhIEpvYXF1aW0gRmVybmFuZGVzLCAyMTEsIDcxIC0gVmlsYSBOb2d1ZWlyYSIsImlhdCI6MTY0MTg1NDQ0M30.NGAp6nbdH24nsPQ9lQxUSd_zOpeQwB2sbbRHrkJ-EJs"
-    const aaa = "rappi4A"
     const [restaurantData, setRestaurantData] = useState("")
     const [qtd, setQnd] = useState(0)
     const [address, setAddress] = useState()
@@ -21,27 +21,19 @@ export default function CartPage() {
     }
     const { states, setters, requests } = useContext(GlobalContext);
     const [cart, setCart] = useState(states.cart)
-
     let total = 0
 
     useEffect(() => {
         getRestaurant()
         getAddress()
-        
-        // localStorage.getItem("cart")
     }, [])
 
     useEffect(() => {
      renderCart()
     }, [qtd])
 
-    // const newCart = localStorage.getItem("cart")
-    // const cart = JSON.parse(newCart)
-    // console.log(cart)
-
     const getRestaurant = () => {
-
-        axios.get(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/${states.idRestaurant}`, {
+        axios.get(`${BASE_URL}restaurants/${states.idRestaurant}`, {
             headers: {
                 auth: token,
             }
@@ -55,8 +47,7 @@ export default function CartPage() {
     }
     
     const getAddress = () => {
-
-        axios.get(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/profile/address`, {
+        axios.get(`${BASE_URL}profile/address`, {
             headers: {
                 auth: token
             }
@@ -70,23 +61,18 @@ export default function CartPage() {
     }
 
     const placeOrder = () => {
-
         cart.forEach((item) => {
             const prod = {id: item.id, quantity: item.quantity}
             order.products.push(prod)
         })
-            console.log(order)
-
         const body = order
-        console.log(body)
 
-        axios.post(`https://us-central1-missao-newton.cloudfunctions.net/${aaa}/restaurants/${states.idRestaurant}/order`, body, {
+        axios.post(`${BASE_URL}restaurants/${states.idRestaurant}/order`, body, {
             headers: {
                 auth: token
             }
         })
         .then((res) => {
-            setCart("")
             alert("Pedido efetuado com sucesso!")
             goToHomePage(navigate)
         })
@@ -123,10 +109,8 @@ export default function CartPage() {
     }
 
     const deleteItemCart = (id) => {
-        console.log(id)
         for(let i = 0; i < cart.length; i++){
             if(cart[i].id === id){
-                console.log(cart[i].quantity)
                 if(cart[i].quantity !== 1){
                     cart[i].quantity -= 1
                     setQnd(qtd + 1)               
@@ -136,7 +120,6 @@ export default function CartPage() {
                 }
             } 
         }
-        console.log(cart)
     }
   
     const onChangePaymentMethods = (e) => {
