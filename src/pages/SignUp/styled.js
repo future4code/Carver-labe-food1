@@ -6,7 +6,7 @@ export const ScreenContainer = styled.div`
   align-items: center;
   width: 100vw;
 `
-export const LogoImage = styled.img`
+export const Img = styled.img`
   width: 150px;
   height: 68px;
   margin: 20px 128px 16px;

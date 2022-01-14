@@ -11,7 +11,11 @@ export const useGetProfileInfo = () => {
 
     useEffect(() => {
         setters.setIsLoading(true)
-        axios.get(url, { headers: { auth: token } })
+        axios.get(url, {
+            headers: {
+                auth: localStorage.getItem('token')
+            }
+        })
             .then((res) => {
                 setters.setProfile(res.data.user)
                 setters.setIsLoading(false)

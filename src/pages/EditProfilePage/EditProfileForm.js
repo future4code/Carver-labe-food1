@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +14,9 @@ import { validateCPF } from 'validations-br';
 import { updateProfile } from "../../services/user";
 import InputRHF from '../../components/RHF/InputRHF';
 import InputMaskRHF from '../../components/RHF/InputMaskRHF';
+import { useGetProfileInfo } from '../../hooks/useGetProfileInfo';
+import { GlobalContext } from '../../contexts/GlobalStateContext';
+import { goToProfilePage } from '../../routes/coordinator';
 
 const mode = 'onSubmit';
 
@@ -38,14 +41,24 @@ const schema = {
 
 const EditProfileForm = () => {
     const history = useNavigate()
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+    const { states } = useContext(GlobalContext)
 
     const form = useForm(schema);
     const { control, handleSubmit } = form;
+    useGetProfileInfo()
 
     const onSubmit = () => {
         updateProfile(form.getValues(), history, setIsLoading);
     }
+
+    useEffect(() => {
+        if (states.profile) {
+            form.setValue('name', states.profile.name);
+            form.setValue('cpf', states.profile.cpf);
+            form.setValue('email', states.profile.email);
+        }
+    }, [states.profile])
 
     return (
         <>
@@ -56,6 +69,7 @@ const EditProfileForm = () => {
                     color="inherit"
                     aria-label="menu"
                     sx={{ mr: 15 }}
+                    onClick={() => goToProfilePage(history)}
                 >
                     <ArrowBackIosIcon />
                 </IconButton>

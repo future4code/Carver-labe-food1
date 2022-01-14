@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 import Button from '@material-ui/core/Button';
 import { IconButton, Toolbar } from '@material-ui/core';
@@ -12,6 +13,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import InputRHF from '../../components/RHF/InputRHF';
 import { signAddress } from '../../services/user';
+import { BASE_URL } from "../../constants/url";
+import { goToProfilePage } from '../../routes/coordinator';
+//import { GlobalContext } from '../../contexts/GlobalStateContext';
 
 
 const mode = 'onSubmit';
@@ -19,7 +23,7 @@ const mode = 'onSubmit';
 const defaultValues = {
     street: '',
     number: '',
-    complement: '',
+    apartment: '',
     neighbourhood: '',
     city: '',
     state: ''
@@ -32,7 +36,7 @@ const schema = {
         yup.object().shape({
             street: yup.string().required('Campo Obrigatório'),
             number: yup.string().required('Campo Obrigatório'),
-            complement: yup.string(),
+            apartment: yup.string(),
             neighbourhood: yup.string().required('Campo Obrigatório'),
             city: yup.string().required('Campo Obrigatório'),
             state: yup.string().required('Campo Obrigatório')
@@ -46,9 +50,36 @@ const EditAddressForm = () => {
     const form = useForm(schema);
     const { control, handleSubmit } = form;
 
+
     const onSubmit = () => {
         signAddress(form.getValues(), history, setIsLoading)
     }
+
+    const getFullAddress = () => {
+        setIsLoading(true)
+        axios.get(`${BASE_URL}profile/address`, {
+            headers: {
+                auth: localStorage.getItem('token')
+            }
+        })
+            .then((res) => {
+                form.setValue('neighbourhood', res.data.address.neighbourhood)
+                form.setValue('street', res.data.address.street)
+                form.setValue('number', res.data.address.number)
+                form.setValue('city', res.data.address.city)
+                form.setValue('state', res.data.address.state)
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                setIsLoading(false)
+                alert(err.message)
+            });
+    }
+
+    useEffect(() => {
+        getFullAddress()
+   }, [])
+
     return (
         <>
             <Toolbar sx={{ width: '-webkit-fill-available', bgcolor: 'background.paper', boxShadow: 1, }}>
@@ -58,6 +89,8 @@ const EditAddressForm = () => {
                     color="inherit"
                     aria-label="menu"
                     sx={{ mr: 15 }}
+                    onClick={() => goToProfilePage(history)}
+
                 >
                     <ArrowBackIosIcon />
                 </IconButton>
@@ -82,7 +115,6 @@ const EditAddressForm = () => {
                     name="street"
                     label={"logradouro"}
                     control={control}
-
                 />
                 <InputRHF
                     name='number'
@@ -91,7 +123,7 @@ const EditAddressForm = () => {
                 />
 
                 <InputRHF
-                    name='complement'
+                    name='apartment'
                     label={'Complemento'}
                     control={control}
 
