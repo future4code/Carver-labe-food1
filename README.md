@@ -5,8 +5,8 @@ Nome dos integrantes:
 - Pessoa 1 - André Vinicius Marques
 - Pessoa 1 - César Huber
 - Pessoa 2 - Eliana Cristina de Deus Santos
-- Pessoa 3 - Renan Lopresti Lage
-- Pessoa 4 - Karen Alves de Santana Gaspar
+- Pessoa 3 - Karen Alves de Santana Gaspar
+- Pessoa 4 - Renan Lopresti Lage
 
 Link do Surge: [Clique Aqui](rappi4A-carver.surge.sh)
 
