@@ -1,16 +1,14 @@
 import axios from 'axios'
 import { BASE_URL } from '../constants/url'
-import { useEffect, useContext } from 'react'
-import { GlobalContext } from '../contexts/GlobalStateContext'
+import { useEffect } from 'react'
 
-export const useGetOrderHistory = (setOrderHistory, setLoadingHistory) => {
+export const useGetOrderHistory = (setOrderHistory, setLoadingHist) => {
 
     const url = `${BASE_URL}orders/history`
-    const { setters } = useContext(GlobalContext)
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        setters.setIsLoading(true)
+        setLoadingHist(true)
         axios.get(url, {
             headers: {
                 auth: token
@@ -18,11 +16,11 @@ export const useGetOrderHistory = (setOrderHistory, setLoadingHistory) => {
         })
             .then((res) => {
                 setOrderHistory(res.data.orders)
-                setters.setIsLoading(false)
+                setLoadingHist(false)
             })
             .catch((err) => {
                 alert(err.response.data.message)
-                setters.setIsLoading(false)
+                setLoadingHist(false)
             })
     }, [])
 

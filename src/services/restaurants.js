@@ -14,7 +14,6 @@ export const getRestaurantDetail = (id, setRestaurant, token, getCategorys, setC
    setIsLoading(false)
   })
   .catch((err) => {
-   console.log(err.response)
    setIsLoading(false)
   })
 }
@@ -29,7 +28,6 @@ export const getRestaurants = (setRestaurants) => {
           setRestaurants(response.data.restaurants)
       })
       .catch((error) => {
-          console.log(error)
       })
 
 

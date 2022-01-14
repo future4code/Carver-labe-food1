@@ -17,12 +17,10 @@ const useRequestData = (initialData, url) => {
       }
     })
       .then((response) => {
-        console.log(response.data)
         setData(response.data)
         setters.setIsLoading(false)
       })
       .catch((error) => {
-        console.log(error)
         alert('Ocorreu um erro, tente novamente')
         setters.setIsLoading(false)
       })
