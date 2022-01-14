@@ -8,11 +8,11 @@ display: flex;
 flex-direction: column ;
 align-items:center;
 padding-bottom:60px;
-.hr{
- width:90%;
- border: 0.1px solid #000;
- margin-bottom:2%
-}
+`
+export const Line = styled.div`
+width:90%;
+border: 0.1px solid #000;
+margin-bottom:2%;
 `
 export const DetailContainer = styled.div`
 padding-top:7vh;
@@ -27,6 +27,7 @@ justify-content:center;
 export const Img = styled.img`
 border-radius: 25px 25px 0 0 ;
 width: 97%;
+height: 30vh;
 `
 export const FreteContainer = styled.div`
 display: flex;
