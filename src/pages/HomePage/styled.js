@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { TextField } from "@mui/material"
 
 export const MainContainer = styled.div`
 display: flex;
@@ -12,23 +11,39 @@ h4{
 }
 `
 
-export const Input = styled(TextField)`
-width: 338px;
+export const Input = styled.input`
+width: 308px;
 margin-bottom: 20px;
+border: none;
+height: 56px;
+font-size: 15px;
+padding-left: 10px;
 `
 
 export const InputContainer = styled.div`
+width: 328px;
 display: flex;
+border: 1px solid #b8b8b8;
+height: 58px;
+padding-left: 10px;
+border-radius: 3px;
+textarea:focus, input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
 `
 
 export const PageTittleContainer = styled.div`
-    width: 100%;
-    height: 49px;
-    top: 0;
     position: fixed;
-    display: flex;
-    border-bottom: solid 1px #b8b8b8;
+    top: 0;
+    width: 100%;
+    height: 56px;
+    box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);
     background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1;
 `
 
 export const TittleNavContainer = styled.div`

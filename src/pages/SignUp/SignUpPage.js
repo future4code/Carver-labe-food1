@@ -5,7 +5,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import logo from '../../assets/logo.png';
 import { ScreenContainer } from './styled';
 import SignUpForm from './SignUpForm';
-import { LogoImage } from './styled';
+import { Img } from './styled';
 import useUnprotectedPage from '../../hooks/useUnprotectedPage';
 
 const SignUpPage = () => {
@@ -24,7 +24,7 @@ const SignUpPage = () => {
                     <ArrowBackIosIcon />
                 </IconButton>
             </Toolbar>
-            <LogoImage src={logo} alt='logo' />
+            <Img src={logo} alt='logo' />
             <SignUpForm />
         </ScreenContainer>
     );

@@ -5,21 +5,20 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 
 export const ImageContainer = styled(CardMedia)`
-    width: 100%;
-    height: 140px;
-    object-fit: contain;
+width: 100%;
+height: 130px;
+object-fit: contain;
 `
 export const RestaurantContainer = styled(CardActionArea)`
-    width: 338px;
-    height: 198px;
-    border-radius: 8px;
-    border: solid 1px #b8b8b8;
+width: 328px;
+height: 188px;
+border: solid 1px #b8b8b8;
 `
 export const MainContainer = styled(Card)`
-  width: 338px;
-  height: 198px;
-  margin: 50px 0 0;
-  padding: 0 0 16px;
+width: 328px;
+height: 188px;
+margin: 16px 0 0;
+padding: 0 0 16px;
 `
 export const DescriptionContainer = styled(CardContent)`
 display: flex;
