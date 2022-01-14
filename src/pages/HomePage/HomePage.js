@@ -22,11 +22,10 @@ export default function HomePage() {
     const [activeOrder, setActiveOrder] = useState({})
     const { states, setters } = useContext(GlobalContext)
     const history = useNavigate()
-    const token = localStorage.getItem('token')
 
     useEffect(() => {
-        getRestaurants(token, setRestaurants)
-        getActiveOrder(token, setActiveOrder)
+        getRestaurants(setRestaurants)
+        getActiveOrder(setActiveOrder)
     }, [])
 
     const onClickCard = (id) => {
