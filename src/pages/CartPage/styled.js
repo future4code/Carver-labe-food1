@@ -305,11 +305,13 @@ export const DivButton = styled.div`
     border-radius: 2px;
     background-color: white;
     align-self: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
 `
 
 export const Button = styled.button`
     width: 100%;
-    height: 30px;
+    height: 40px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -325,7 +327,7 @@ export const Button = styled.button`
 
 export const DisabledButton = styled.button`
     width: 100%;
-    height: 30px;
+    height: 40px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -351,4 +353,5 @@ export const DivScroll = styled.div`
 
 export const DivRadio = styled.div`
     display: flex;
+    margin-top: 10px;
 `
