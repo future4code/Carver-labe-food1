@@ -26,33 +26,21 @@ export default function HomePage() {
     useEffect(()=> {
         getRestaurants(setRestaurants, setters.setIsLoading)
         getActiveOrder(setActiveOrder)
+        setters.setIdRestaurant(null)
     }, [])
 
-    // ------TENTATIVA DE CÓDIGO PARA ATUALIZAR A PÁGINA A CADA 1 MINUTO--------
-
-    // useEffect(() => {
-    //     setTimeout(()=>{
-    //         getRestaurants(setRestaurants, setters.setIsLoading)
-    //         getActiveOrder(setActiveOrder)
-    //     }, 60000)
-    // }, [])
-
-    //------TENTATIVA DE CÓDIGO PARA ATUALIZAR A PÁGINA DE ACORDO COM O TEMPO DO PEDIDO------ 
-
-    // const inicioPedido = activeOrder.createdAt
-    // const expiraçãoPedido = activeOrder.expiresAt
-    // console.log(inicioPedido, expiraçãoPedido)
-
-    // useEffect(() => {
-    //     getRestaurants(setRestaurants, setters.setIsLoading)
-    //     getActiveOrder(setActiveOrder)
-    //         if (inicioPedido < expiraçãoPedido)
-    //         setTimeout(() => {
-    //            setShowOrder(true)
-    //         } else { 
-    //             setShowOrder(false)
-    //         }, 60000);   
-    // }, [showOrder])
+    useEffect(() => {
+        console.log(localStorage.getItem('expiration'))
+        console.log(new Date().getTime())
+        let myInterval = setInterval(() => {
+            if (new Date().getTime() >= localStorage.getItem('expiration')) {
+                setters.setVisibleActiveOrder(false)
+            }
+        }, 1000)
+        return () => {
+            clearInterval(myInterval)
+        }
+    })
 
 
     const onClickCard = (id) => {
@@ -101,7 +89,7 @@ export default function HomePage() {
             />
             {restaurantsList && restaurantsList.length > 0 ? restaurantsList : <LoadingCard />}
 
-            {activeOrder && Object.keys(activeOrder).length > 0 && (
+            {states.visibleActiveOrder && (
                 <ActiveOrderCard order={activeOrder}/>)
             }
         </MainContainer >
