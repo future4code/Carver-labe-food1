@@ -50,7 +50,7 @@ export default function RestaurantPage() {
    newArray.splice(index, 1)
    setters.setCart(newArray)
   } else {
-   newProduct = { ...product, quantity: 1 }
+   newProduct = { ...product, quantity: qnt }
    newArray = [...states.cart, newProduct]
    setters.setCart(newArray)
   }
@@ -140,6 +140,7 @@ export default function RestaurantPage() {
    setters.setCategorys,
    setters.setIsLoading
   )
+  states.cart.length === 0 && setters.setIdRestaurant(null)
  }, [])
 
  return (
