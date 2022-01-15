@@ -17,7 +17,7 @@ export default function ActiveOrderCard(props) {
                 <p>{restaurantName}</p>
                 <p>
                     <strong>
-                        SUBTOTAL: {totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                        SUBTOTAL: {Number(totalPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                     </strong>
                 </p>
             </OrderContainer>
