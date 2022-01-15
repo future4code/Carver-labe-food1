@@ -27,7 +27,7 @@ export default function CardProduct({ product, functionButton }) {
      <Typography>{product.description}</Typography>
      <Typography>{`${product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</Typography>
     </CardContent>
-    <Button onClick={functionButton} disabled={states.idRestaurant !== null && params.id !== states.idRestaurant}>Adicionar</Button>
+    <Button onClick={() => functionButton(product)} disabled={states.idRestaurant !== null && params.id !== states.idRestaurant}>Adicionar</Button>
    </Box>
   </Card>
  )

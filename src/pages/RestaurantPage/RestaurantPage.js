@@ -37,7 +37,7 @@ export default function RestaurantPage() {
  const handleClose = () => setOpen(false);
 
  const putProductInCart = (product) => {
-console.log(product)
+
   let quant
   let newProduct
   let newArray
