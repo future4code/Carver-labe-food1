@@ -26,7 +26,7 @@ export default function HomePage() {
     useEffect(()=> {
         getRestaurants(setRestaurants, setters.setIsLoading)
         getActiveOrder(setActiveOrder)
-        setters.setIdRestaurant(null)
+        states.cart.length === 0 && setters.setIdRestaurant(null)
     }, [])
 
     useEffect(() => {
