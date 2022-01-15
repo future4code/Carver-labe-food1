@@ -10,7 +10,7 @@ const GlobalState = (props) => {
     const [restaurant, setRestaurant] = useState({})
     const [idRestaurant, setIdRestaurant] = useState()
     const [categorys, setCategorys] = useState([])
-    const [ visibleActiveOrder, setVisibleActiveOrder ] = useState(true)
+    const [ visibleActiveOrder, setVisibleActiveOrder ] = useState(false)
 
     const states = { cart, isLoading, profile, restaurant, categorys, idRestaurant, visibleActiveOrder}
     const setters = { setCart, setIsLoading, setProfile, setRestaurant, setCategorys, setIdRestaurant, setVisibleActiveOrder }
