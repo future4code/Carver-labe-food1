@@ -16,6 +16,7 @@ export const DivHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    padding-bottom: 8px;
 `
 
 export const DivAdress = styled.div`
@@ -202,7 +203,6 @@ export const SpanRest3 = styled.span`
 export const SpanRest4 = styled.span`
     width: 78px;
     height: 19px;
-    margin-top: 6px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
