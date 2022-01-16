@@ -45,9 +45,10 @@ export const PageTittleContainer = styled.div`
 `
 
 export const TittleNavContainer = styled.div`
-    flex-grow: 1;
-    height: 100%;
+    width: 175px;
+    height: 44px;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
 `

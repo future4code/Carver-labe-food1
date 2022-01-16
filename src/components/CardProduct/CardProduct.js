@@ -14,7 +14,7 @@ export default function CardProduct({ product, functionButton }) {
  const {states} = useContext(GlobalContext)
 
  return (
-  <Card sx={{ width: 305, display: 'flex', mb: 1 }}>
+  <Card sx={{ width: 328, display: 'flex', mb: 1 }}>
    <CardMedia
     component="img"
     sx={{ width: 100 }}
@@ -23,7 +23,7 @@ export default function CardProduct({ product, functionButton }) {
    />
    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
     <CardContent sx={{ flex: '1 0 auto' }}>
-     <Typography>{product.name}</Typography>
+     <Typography color="primary">{product.name}</Typography>
      <Typography>{product.description}</Typography>
      <Typography>{`${product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</Typography>
     </CardContent>

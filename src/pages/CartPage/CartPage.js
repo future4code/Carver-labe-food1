@@ -136,7 +136,7 @@ export default function CartPage() {
     return (
         <DivMain>
             <DivHeader>
-                <h3>Meu carrinho</h3>
+                Meu carrinho
             </DivHeader>
 
             <DivScroll>
