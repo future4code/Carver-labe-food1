@@ -1,14 +1,38 @@
-# Labefood - rappi 
-Projeto realizado com a tecnologia React.js, esse projeto é 100% para celular, foram utilizadas as bibliotecas do Material UI e styled-components para o design do site, para realizar as rotas foram utilizado o react router, para validação dos campos dos formulários de login, cadastro, edição de perfil, foram utilizados as bibliotecas react-hook-form, @hookform/resolvers yup, validations-br@^1.2.0, react-input-mask@^2.0.4, e houve integração da API disponibilizada pelo curso.
+# Labefood - Rappi 
 
-Nome dos integrantes: 
+## Desenvolvido por: 
 - Pessoa 1 - André Vinicius Marques
 - Pessoa 1 - César Huber
 - Pessoa 2 - Eliana Cristina de Deus Santos
 - Pessoa 3 - Karen Alves de Santana Gaspar
 - Pessoa 4 - Renan Lopresti Lage
 
-Link do Surge: [Clique Aqui](rappi4A-carver.surge.sh)
+## Objetivo
+Desenvolver um website para mobile semelhante ao Rappi. 
+<br>Objetivo alcançado: ✅
+
+## O que funciona
+<li> Tela de Login com Autenticação e Autorização
+<li> Tela de Cadastro
+<li> Requisições da API
+<li> Filtro de restaurantes por nome e por categoria ao clicar nelas
+<li> Visualização de detalhes dos restaurantes
+<li> Visualização dos pratos
+<li> Adição de pratos no carrinho com possibilidade de adicionar até 10 itens iguais
+<li> Visualição do carrinho com possibilidade de remover cada item
+<li> Comfirmação de produto com visualização de card enquanto o pedido está em andamento
+<li> Visualização de tela de perfil
+<li> Edição de perfil e cadastro
+
+## Tecnologias e bibliotecas utilizadas:
+<li> React JS
+<li> styled-components
+<li> axios
+<li> react-router-dom
+<li> material ui
+<li> API Labefood
+
+## Link do Surge: [Clique Aqui](carver-rappi4a.surge.sh)
 
  # Imagens
 ![image](https://user-images.githubusercontent.com/89935565/149559842-e1b42857-5a4d-4121-b633-6cb27d8a57ff.png)

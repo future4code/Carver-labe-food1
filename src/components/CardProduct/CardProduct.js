@@ -7,6 +7,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { useParams } from 'react-router-dom'
 import { GlobalContext } from '../../contexts/GlobalStateContext'
+import { MainContainer } from "./styled"
 
 export default function CardProduct({ product, functionButton }) {
 
@@ -14,7 +15,7 @@ export default function CardProduct({ product, functionButton }) {
  const {states} = useContext(GlobalContext)
 
  return (
-  <Card sx={{ width: 328, display: 'flex', mb: 1 }}>
+  <MainContainer>
    <CardMedia
     component="img"
     sx={{ width: 100 }}
@@ -29,6 +30,6 @@ export default function CardProduct({ product, functionButton }) {
     </CardContent>
     <Button onClick={() => functionButton(product)} disabled={states.idRestaurant !== null && params.id !== states.idRestaurant}>Adicionar</Button>
    </Box>
-  </Card>
+  </MainContainer>
  )
 }

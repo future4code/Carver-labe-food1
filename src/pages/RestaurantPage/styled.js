@@ -5,7 +5,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding: 16px;
-margin: 50px;
+margin: 45px;
 `
 export const ProductsContainer = styled.div`
 display: flex;
@@ -13,6 +13,7 @@ flex-direction: column ;
 align-items:center;
 padding-bottom:60px;
 width: 328px;
+padding: 16px;
 p{
     align-self: flex-start;
 }
@@ -68,6 +69,6 @@ export const TittleNavContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     p{
-        padding-left: 120px;
+        padding-left: 110px;
     }
 `
