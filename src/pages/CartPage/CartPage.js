@@ -23,7 +23,7 @@ export default function CartPage() {
     let total = 0
 
     useEffect(() => {
-        getRestaurant()
+        cart.length > 0 && getRestaurant()
         getAddress()
     }, [])
 
@@ -47,6 +47,7 @@ export default function CartPage() {
                 setRestaurantData(res.data.restaurant)
             })
             .catch((err) => {
+                alert('Ocorreu um erro. =/\n Tente novamente mais tarde.')
             })
     }
 
@@ -79,7 +80,7 @@ export default function CartPage() {
                 alert("Pedido efetuado com sucesso!")
                 setters.setCart([])
                 goToHomePage(navigate)
-                setters.setVisibleActiveOrder(true)
+                localStorage.setItem('activeOrder', true)
                 localStorage.setItem('expiration', res.data.order.expiresAt)
             })
             .catch((err) => {

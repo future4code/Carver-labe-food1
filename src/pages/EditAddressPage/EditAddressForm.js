@@ -15,7 +15,6 @@ import InputRHF from '../../components/RHF/InputRHF';
 import { signAddress } from '../../services/user';
 import { BASE_URL } from "../../constants/url";
 import { goToProfilePage } from '../../routes/coordinator';
-//import { GlobalContext } from '../../contexts/GlobalStateContext';
 
 
 const mode = 'onSubmit';
