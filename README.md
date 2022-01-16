@@ -2,10 +2,10 @@
 
 ## Desenvolvido por: 
 - Pessoa 1 - André Vinicius Marques
-- Pessoa 1 - Cesar Huber
-- Pessoa 2 - Eliana Cristina de Deus Santos
-- Pessoa 3 - Karen Alves de Santana Gaspar
-- Pessoa 4 - Renan Lopresti Lage
+- Pessoa 2 - Cesar Huber
+- Pessoa 3 - Eliana Cristina de Deus Santos
+- Pessoa 4 - Karen Alves de Santana Gaspar
+- Pessoa 5 - Renan Lopresti Lage
 
 ## Objetivo
 Desenvolver um website para mobile semelhante ao Rappi. 
