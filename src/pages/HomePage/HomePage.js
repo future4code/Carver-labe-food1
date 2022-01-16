@@ -24,7 +24,7 @@ export default function HomePage() {
 
     useEffect(() => {
         getRestaurants(setRestaurants, setters.setIsLoading)
-        getActiveOrder(setActiveOrder)
+        new Date().getTime() < localStorage.getItem('expiration') && getActiveOrder(setActiveOrder)
         states.cart.length === 0 && setters.setIdRestaurant(null)
     }, [])
 
@@ -93,6 +93,9 @@ export default function HomePage() {
             </MainContainer >
         )
     }
+
+    console.log('activeOrder:', activeOrder)
+    console.log('ls activeOrder:', localStorage.getItem('activeOrder'))
 
     return (
         renderPage()
