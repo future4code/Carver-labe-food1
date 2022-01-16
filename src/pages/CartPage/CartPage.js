@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalStateContext"
-import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10, DisabledButton } from "./styled";
+import { DivAdress, DivHeader, DivMain, DivRestaurant, DivItems, DivItem, DivImage, DivDescription, DivDelivery, DivSubTotal, DivPaymentMethods, ImG, Span1, Span2, Span3, Span4, Span5, Span6, Span7, Span8, Span9, DivButton, Button, DivScroll, SpanRest1, SpanRest2, SpanRest3, SpanRest4, ButtonRest, DivRadio, Span10, DisabledButton, DivButtonRemover } from "./styled";
 import { goToHomePage } from "../../routes/coordinator";
 import { BASE_URL } from '../../constants/url'
 
@@ -136,7 +136,7 @@ export default function CartPage() {
     return (
         <DivMain>
             <DivHeader>
-                <h3>Meu carrinho</h3>
+                Meu carrinho
             </DivHeader>
 
             <DivScroll>

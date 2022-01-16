@@ -13,9 +13,7 @@ h4{
 
 export const Input = styled.input`
 width: 308px;
-margin-bottom: 20px;
 border: none;
-height: 56px;
 font-size: 15px;
 padding-left: 10px;
 `
@@ -47,9 +45,10 @@ export const PageTittleContainer = styled.div`
 `
 
 export const TittleNavContainer = styled.div`
-    flex-grow: 1;
-    height: 100%;
+    width: 175px;
+    height: 44px;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
 `
