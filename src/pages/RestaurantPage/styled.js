@@ -24,6 +24,7 @@ margin-bottom:2%;
 `
 export const DetailContainer = styled.div`
 padding-top: 20px;
+width: 328px;
 `
 export const TextContainer = styled.div`
 padding:3%;
