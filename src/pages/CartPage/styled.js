@@ -9,14 +9,6 @@ export const DivMain = styled.div`
 `
 
 export const DivHeader = styled.div`
-    /* display: flex;
-    width: 100%;
-    height: 80px;
-    align-items: center;
-    justify-content: center;
-    align-self: center; */
-    /* position: fixed;
-    top: 0; */
     width: 100%;
     height: 64px;
     box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);
@@ -31,8 +23,8 @@ export const DivAdress = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     align-items: flex-start;
-    width: 90%;
-    height: 80px;
+    width: 360px;
+    height: 76px;
     margin: 1px 0 16px;
     padding: 16px;
     background-color: #eee;
@@ -42,7 +34,7 @@ export const DivAdress = styled.div`
 export const Span1 = styled.span`
     width: 328px;
     height: 18px;
-    margin: 0 0 8px;
+    margin: 8px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -56,7 +48,7 @@ export const Span1 = styled.span`
 export const Span2 = styled.span`  
     width: 328px;
     height: 18px;
-    margin: 8px 0 0;
+    margin: 8px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -70,7 +62,7 @@ export const Span2 = styled.span`
 export const Span3 = styled.span`  
     width: 328px;
     height: 18px;
-    margin: 16px 16px 8px;
+    margin: 8px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -83,7 +75,7 @@ export const Span3 = styled.span`
 export const Span4 = styled.span`  
     width: 328px;
     height: 18px;
-    margin: 8px 16px;
+    margin: 8px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -96,7 +88,7 @@ export const Span4 = styled.span`
 export const Span5 = styled.span`
     width: 328px;
     height: 18px;
-    margin: 8px 16px;
+    margin: 8px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -125,7 +117,6 @@ export const Span6 = styled.span`
 export const Span7 = styled.span`
   width: 164px;
   height: 18px;
-  margin: 15px 0 25px 16px;
   font-family: Roboto;
   font-size: 16px;
   font-weight: normal;
@@ -138,7 +129,6 @@ export const Span7 = styled.span`
 export const Span8 = styled.span`
   width: 164px;
   height: 21px;
-  margin: 13px 16px 24px 0;
   font-family: Roboto;
   font-size: 18px;
   font-weight: bold;
@@ -165,26 +155,27 @@ export const DivRestaurant = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
+    align-items: flex-start;
+    width: 360px;
     height: 110px;
-    align-items: flex-start; 
-    align-self: center; 
+    margin: 1px 0 16px;
+    align-self: center;
 `
 
 export const SpanRest1 = styled.span`
     border: 1px solid #e86e5a;
-    display: flex;
-    align-items: center;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    text-align: center;
     align-self: flex-end;
     padding: 0 15px;
-    height: 30px;
+    height: 35px;
     color: #e86e5a;
 `
 
 export const SpanRest2 = styled.span`
-    width: 166px;
+    width: 196px;
     height: 18px;
-    margin: 18px 16px 6px 0;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -196,9 +187,8 @@ export const SpanRest2 = styled.span`
 `
 
 export const SpanRest3 = styled.span`
-   width: 198px;
+    width: 198px;
     height: 30px;
-    margin: 6px 17px 6px 0;
     font-family: Roboto;
     font-size: 14px;
     font-weight: normal;
@@ -210,9 +200,9 @@ export const SpanRest3 = styled.span`
 `
 
 export const SpanRest4 = styled.span`
-    width: 108px;
+    width: 78px;
     height: 19px;
-    margin: 6px 17px 15px 0;
+    margin-top: 6px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -224,25 +214,23 @@ export const SpanRest4 = styled.span`
 `
 
 export const ButtonRest = styled.button`
+    background-color: white;
     display: flex;
     align-items: center;
-    background-color: white;
     color: #e86e5a;
-    justify-content: center;
     width: 90px;
     height: 31px;
-    margin: 9px 0 0 17px;
-    padding: 8px 23px 9px 24px;
-    border-radius: 8px;
+    padding: 16px;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     border: solid 1px #e02020;
     align-self: flex-end;
-    margin-top: 20px;
 `
 
 export const DivItems = styled.div`
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 328px;
     align-items: center;
     margin: 15px 15px;
     align-self: center;
@@ -250,23 +238,24 @@ export const DivItems = styled.div`
 export const DivItem = styled.div`
     border: 1px solid #b8b8b8;
     display: flex;
-    flex-direction: row;
-    width: 90%;
-    height: 200px;
-    margin-top: 15px;
+    width: 328px;
+    height: 120px;
+    margin-bottom: 15px;
+    border-radius: 8px;
 `
 export const DivImage = styled.div`
     display: flex;
-    width: 50%;
-    height: 100%;
+    width: 97px;
+    height: 120;
+    border-radius: 8px 0px 8px 0px;
 `
 export const DivDescription = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding-left: 15px;
-    width: 100%;
-    height: 100%;
+    height: 120px;
+    width: 231px;  
 `
 
 export const DivDelivery = styled.div`
@@ -280,22 +269,25 @@ export const DivDelivery = styled.div`
 
 export const DivSubTotal = styled.div`
     display: flex;
-    width: 90%;
+    width: 328px;
     align-items: center;
-    justify-content: space-evenly; 
-    align-self: center;   
+    justify-content: space-between; 
+    align-self: center;
+    margin-bottom: 25px;
+ 
 `
 
 export const DivPaymentMethods = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 90%;
+    width: 328px;
     align-self: center;
 `
 export const ImG = styled.img`
     width: 100%;
     height: 100%;
+    border-radius: 8px 0px 0px 8px;
 `
 
 export const DivButton = styled.div`
