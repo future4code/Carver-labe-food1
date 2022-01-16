@@ -13,9 +13,7 @@ h4{
 
 export const Input = styled.input`
 width: 308px;
-margin-bottom: 20px;
 border: none;
-height: 56px;
 font-size: 15px;
 padding-left: 10px;
 `
@@ -23,6 +21,7 @@ padding-left: 10px;
 export const InputContainer = styled.div`
 width: 328px;
 display: flex;
+justify-content: center;
 border: 1px solid #b8b8b8;
 height: 58px;
 padding-left: 10px;

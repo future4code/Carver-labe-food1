@@ -9,14 +9,6 @@ export const DivMain = styled.div`
 `
 
 export const DivHeader = styled.div`
-    /* display: flex;
-    width: 100%;
-    height: 80px;
-    align-items: center;
-    justify-content: center;
-    align-self: center; */
-    /* position: fixed;
-    top: 0; */
     width: 100%;
     height: 64px;
     box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);

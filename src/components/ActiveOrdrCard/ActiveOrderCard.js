@@ -4,7 +4,7 @@ import { CardContainer, OrderContainer, ClockContainer, OrderInProgress } from '
 
 export default function ActiveOrderCard(props) {
 
-    const { restaurantName, totalPrice} = props.order
+    const { restaurantName = '', totalPrice = 0 } = props.order
     
     
     return (
