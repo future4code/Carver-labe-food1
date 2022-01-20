@@ -60,7 +60,6 @@ export const updateProfile = (body, history, setIsLoading) => {
         }
     })
         .then((res) => {
-            localStorage.setItem("token", res.data.token)
             setIsLoading(false)
             goToHomePage(history)
         })
